@@ -20,9 +20,9 @@ namespace IceCreamShopListImplement.Implements
         public List<IceCreamViewModel> GetFullList()
         {
             var result = new List<IceCreamViewModel>();
-            foreach (var icecream in source.IceCreams)
+            foreach (var iceCream in source.IceCreams)
             {
-                result.Add(CreateModel(icecream));
+                result.Add(CreateModel(iceCream));
             }
             return result;
         }
@@ -139,11 +139,11 @@ namespace IceCreamShopListImplement.Implements
             foreach (var ii in iceCream.IceCreamIngredients)
             {
                 string ingredientName = string.Empty;
-                foreach (var component in source.Ingredients)
+                foreach (var ingredient in source.Ingredients)
                 {
-                    if (ii.Key == component.Id)
+                    if (ii.Key == ingredient.Id)
                     {
-                        ingredientName = component.IngredientName;
+                        ingredientName = ingredient.IngredientName;
                         break;
                     }
                 }
