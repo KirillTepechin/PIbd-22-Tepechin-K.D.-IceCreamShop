@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IceCreamShopListImplements.Implements
+namespace IceCreamShopListImplement.Implements
 {
     public class IceCreamStorage : IIceCreamStorage 
     {
