@@ -19,10 +19,10 @@ namespace IceCreamShopBusinessLogic.BusinessLogics
         }
         public void CreateOrUpdate(IceCreamBindingModel model)
         {
-            var icecream = _iceCreamStorage.GetElement(new IceCreamBindingModel { IceCreamName = model.IceCreamName });
-            if (icecream != null && icecream.Id != model.Id)
+            var ingredient = _iceCreamStorage.GetElement(new IceCreamBindingModel { IceCreamName = model.IceCreamName });
+            if (ingredient != null && ingredient.Id != model.Id)
             {
-                throw new Exception("Такое мороженое уже есть");
+                throw new Exception("Такой ингредиент уже есть");
             }
             if (model.Id.HasValue)
             {

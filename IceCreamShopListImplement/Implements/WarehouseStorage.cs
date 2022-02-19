@@ -155,5 +155,10 @@ namespace IceCreamShopListImplement.Implements
                 WarehouseIngredients = warhouseIngredients
             };
         }
+
+        public bool CheckWriteOff(CheckWriteOffBindingModel model)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

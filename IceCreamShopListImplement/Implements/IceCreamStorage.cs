@@ -1,6 +1,7 @@
 ﻿using IceCreamShopContracts.BindingModels;
 using IceCreamShopContracts.StorageContracts;
 using IceCreamShopContracts.ViewModels;
+using IceCreamShopListImplement;
 using IceCreamShopListImplement.Models;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IceCreamShopListImplement.Implements
+namespace IceCreamShopListImplements.Implements
 {
     public class IceCreamStorage : IIceCreamStorage 
     {
