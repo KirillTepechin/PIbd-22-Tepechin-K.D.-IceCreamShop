@@ -50,7 +50,7 @@ namespace IceCreamShopView
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                if (MessageBox.Show("Удаление ", "Удалить мороженое?", MessageBoxButtons.YesNo,
+                if (MessageBox.Show("Удалить?", "Вопрос", MessageBoxButtons.YesNo,
                MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     int id =
@@ -89,9 +89,9 @@ namespace IceCreamShopView
                     foreach (var ic in list)
                     {
                         string stringIngredients = string.Empty;
-                        foreach(var ingr in ic.IceCreamIngredients)
+                        foreach (var ingr in ic.IceCreamIngredients)
                         {
-                            stringIngredients += ingr.Key + ") " + ingr.Value.Item1 + ": " + ingr.Value.Item2+", ";
+                            stringIngredients += ingr.Key + ") " + ingr.Value.Item1 + ": " + ingr.Value.Item2 + ", ";
                         }
                         dataGridView.Rows.Add(new object[] { ic.Id, ic.IceCreamName, ic.Price, stringIngredients[0..^2] });
                     }
