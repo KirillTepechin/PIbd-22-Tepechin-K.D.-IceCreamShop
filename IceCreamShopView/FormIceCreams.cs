@@ -23,7 +23,6 @@ namespace IceCreamShopView
         {
             InitializeComponent();
             _logic = logic;
-
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -34,7 +33,6 @@ namespace IceCreamShopView
                 LoadData();
             }
         }
-
         private void buttonChange_Click(object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count == 1)
@@ -52,7 +50,7 @@ namespace IceCreamShopView
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                if (MessageBox.Show("Удалить?", "Вопрос", MessageBoxButtons.YesNo,
+                if (MessageBox.Show("Удаление ", "Удалить мороженое?", MessageBoxButtons.YesNo,
                MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     int id =
@@ -91,9 +89,9 @@ namespace IceCreamShopView
                     foreach (var ic in list)
                     {
                         string stringIngredients = string.Empty;
-                        foreach (var ingr in ic.IceCreamIngredients)
+                        foreach(var ingr in ic.IceCreamIngredients)
                         {
-                            stringIngredients += ingr.Key + ") " + ingr.Value.Item1 + ": " + ingr.Value.Item2 + ", ";
+                            stringIngredients += ingr.Key + ") " + ingr.Value.Item1 + ": " + ingr.Value.Item2+", ";
                         }
                         dataGridView.Rows.Add(new object[] { ic.Id, ic.IceCreamName, ic.Price, stringIngredients[0..^2] });
                     }
@@ -105,6 +103,6 @@ namespace IceCreamShopView
                MessageBoxIcon.Error);
             }
         }
-       
+        
     }
 }

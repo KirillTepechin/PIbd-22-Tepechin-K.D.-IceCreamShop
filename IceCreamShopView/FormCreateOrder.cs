@@ -62,7 +62,7 @@ namespace IceCreamShopView
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
+                MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK,
                MessageBoxIcon.Error);
             }
         }

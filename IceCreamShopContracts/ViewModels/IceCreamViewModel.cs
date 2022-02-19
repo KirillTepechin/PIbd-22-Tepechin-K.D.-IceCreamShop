@@ -17,6 +17,7 @@ namespace IceCreamShopContracts.ViewModels
         public string IceCreamName { get; set; }
         [DisplayName("Цена")]
         public decimal Price { get; set; }
+        [DisplayName("Ингредиенты")]
         public Dictionary<int, (string, int)> IceCreamIngredients { get; set; }
 
     }

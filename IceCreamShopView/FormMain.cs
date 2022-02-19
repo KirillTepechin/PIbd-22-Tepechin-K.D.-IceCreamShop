@@ -22,7 +22,11 @@ namespace IceCreamShopView
             _orderLogic = orderLogic;
 
         }
-
+        private void toolStripMenuItemWarehouses_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormWarehouses>();
+            form.ShowDialog();
+        }
         private void toolStripMenuItemIngredient_Click(object sender, EventArgs e)
         {
             var form = Program.Container.Resolve<FormIngredients>();
@@ -35,7 +39,11 @@ namespace IceCreamShopView
             form.ShowDialog();
 
         }
-
+        private void toolStripMenuItemReplenish_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormWarehouseReplenish>();
+            form.ShowDialog();
+        }
         private void FormMain_Load(object sender, EventArgs e)
         {
             LoadData();
@@ -134,5 +142,6 @@ namespace IceCreamShopView
                 }
             }
         }
+
     }
 }

@@ -34,6 +34,7 @@ namespace IceCreamShopView
             {
                 LoadData();
             }
+
         }
 
         private void buttonChange_Click(object sender, EventArgs e)
@@ -53,7 +54,7 @@ namespace IceCreamShopView
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                if (MessageBox.Show("Удалить запись", "Вопрос", MessageBoxButtons.YesNo,
+                if (MessageBox.Show("Удалить запись?", "Вопрос", MessageBoxButtons.YesNo,
                MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     int id =
@@ -94,7 +95,6 @@ namespace IceCreamShopView
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
                MessageBoxIcon.Error);
             }
-
         }
     }
 }

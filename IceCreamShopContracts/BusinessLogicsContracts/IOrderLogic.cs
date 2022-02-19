@@ -15,6 +15,5 @@ namespace IceCreamShopContracts.BusinessLogicsContracts
         void TakeOrderInWork(ChangeStatusBindingModel model);
         void FinishOrder(ChangeStatusBindingModel model);
         void DeliveryOrder(ChangeStatusBindingModel model);
-
     }
 }
