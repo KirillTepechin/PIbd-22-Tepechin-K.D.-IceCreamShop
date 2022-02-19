@@ -1,7 +1,8 @@
 using IceCreamShopBusinessLogic.BusinessLogics;
 using IceCreamShopContracts.BusinessLogicsContracts;
 using IceCreamShopContracts.StorageContracts;
-using IceCreamShopListImplement.Implements;
+using IceCreamShopFileImplement;
+using IceCreamShopFileImplement.Implements;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,7 @@ namespace IceCreamShopView
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(Container.Resolve<FormMain>());
+            FileDataListSingleton.Save();
         }
         private static IUnityContainer BuildUnityContainer()
         {
