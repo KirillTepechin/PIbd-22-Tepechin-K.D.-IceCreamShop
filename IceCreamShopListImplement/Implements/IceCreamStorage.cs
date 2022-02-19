@@ -1,6 +1,7 @@
 ﻿using IceCreamShopContracts.BindingModels;
 using IceCreamShopContracts.StorageContracts;
 using IceCreamShopContracts.ViewModels;
+using IceCreamShopListImplement;
 using IceCreamShopListImplement.Models;
 using System;
 using System.Collections.Generic;
