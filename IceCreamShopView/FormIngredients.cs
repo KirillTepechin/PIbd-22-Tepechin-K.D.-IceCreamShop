@@ -34,6 +34,7 @@ namespace IceCreamShopView
             {
                 LoadData();
             }
+
         }
 
         private void buttonChange_Click(object sender, EventArgs e)
@@ -94,7 +95,6 @@ namespace IceCreamShopView
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
                MessageBoxIcon.Error);
             }
-
         }
     }
 }

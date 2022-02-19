@@ -53,6 +53,10 @@ namespace IceCreamShopView
             HierarchicalLifetimeManager());
             currentContainer.RegisterType<IIceCreamLogic, IceCreamLogic>(new
             HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IWarehouseStorage, WarehouseStorage>(new
+           HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IWarehouseLogic, WarehouseLogic>(new
+            HierarchicalLifetimeManager());
             return currentContainer;
         }
     }
