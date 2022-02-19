@@ -171,9 +171,9 @@ namespace IceCreamShopView
                 if (iceCreamIngredients != null)
                 {
                     dataGridView.Rows.Clear();
-                    foreach (var pc in iceCreamIngredients)
+                    foreach (var ii in iceCreamIngredients)
                     {
-                        dataGridView.Rows.Add(new object[] { pc.Key, pc.Value.Item1, pc.Value.Item2 });
+                        dataGridView.Rows.Add(new object[] { ii.Key, ii.Value.Item1, ii.Value.Item2 });
                     }
                 }
             }
