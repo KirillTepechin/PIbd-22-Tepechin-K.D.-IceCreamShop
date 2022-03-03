@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.32106.194
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IceCreamShopView", "IceCreamShopView\IceCreamShopView.csproj", "{FE5F4EEB-D845-4CAF-A48C-70065AC3F50D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CBF5FE06-665C-428C-A04F-806CD8847E6F} = {CBF5FE06-665C-428C-A04F-806CD8847E6F}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IceCreamShopContracts", "IceCreamShopContracts\IceCreamShopContracts.csproj", "{4011F24F-C4FF-4E0D-B2B5-46FB2525092D}"
 EndProject
@@ -11,7 +14,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IceCreamShopBusinessLogic",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IceCreamShopListImplement", "IceCreamShopListImplement\IceCreamShopListImplement.csproj", "{B5D9987C-A379-4F4B-9194-C2499411001F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IceCreamShopFileImplement", "IceCreamShopFileImplement\IceCreamShopFileImplement.csproj", "{6FE8C9A1-531B-4710-BB83-2866CC9206EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IceCreamShopFileImplement", "IceCreamShopFileImplement\IceCreamShopFileImplement.csproj", "{6FE8C9A1-531B-4710-BB83-2866CC9206EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IceCreamShopDatabaseImplement", "IceCreamDatabaseImplement\IceCreamShopDatabaseImplement.csproj", "{CBF5FE06-665C-428C-A04F-806CD8847E6F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +44,10 @@ Global
 		{6FE8C9A1-531B-4710-BB83-2866CC9206EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FE8C9A1-531B-4710-BB83-2866CC9206EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FE8C9A1-531B-4710-BB83-2866CC9206EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBF5FE06-665C-428C-A04F-806CD8847E6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBF5FE06-665C-428C-A04F-806CD8847E6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBF5FE06-665C-428C-A04F-806CD8847E6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBF5FE06-665C-428C-A04F-806CD8847E6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
