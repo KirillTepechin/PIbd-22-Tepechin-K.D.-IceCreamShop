@@ -17,25 +17,23 @@ namespace IceCreamShopDatabaseImplement.Implements
         public bool CheckWriteOff(CheckWriteOffBindingModel model)
         {
             using var context = new IceCreamShopDatabase();
-            var list = GetFullList();
-            var neccesary = new Dictionary<int, int>((IDictionary<int, int>)context.IceCreams.FirstOrDefault(rec => rec.Id == model.IceCreamId).IceCreamIngredients);
-            neccesary.ToDictionary(kvp => neccesary[kvp.Key] *= model.Count);
-            
+            var neccesary = context.IceCreamIngredients.Where(rec => rec.IceCreamId == model.IceCreamId)
+                                                       .ToDictionary(rec => rec.IngredientId, rec => rec.Count * model.Count);
             using var transaction = context.Database.BeginTransaction();
-            foreach(var key in neccesary.Keys)
+            foreach (var key in neccesary.Keys)
             {
-                foreach (var ingredient in context.WarehouseIngredients.Where(rec => rec.IngredientId == key))
+                foreach (var wi in context.WarehouseIngredients.Where(rec => rec.IngredientId == key))
                 {
-                    if (ingredient.Count > neccesary[key])
+                    if (wi.Count > neccesary[key])
                     {
-                        ingredient.Count -= neccesary[key];
+                        wi.Count -= neccesary[key];
                         neccesary[key] = 0;
                         break;
                     }
                     else
                     {
-                        neccesary[key] -= ingredient.Count;
-                        ingredient.Count = 0;
+                        neccesary[key] -= wi.Count;
+                        wi.Count = 0;
                     }
                 }
                 if (neccesary[key] > 0)
@@ -158,7 +156,7 @@ namespace IceCreamShopDatabaseImplement.Implements
             {
                 Id = warehouse.Id,
                 WarehouseName = warehouse.WarehouseName,
-                ResponsiblePerson = warehouse.WarehouseName,
+                ResponsiblePerson = warehouse.ResponsiblePerson,
                 DateCreate = warehouse.DateCreate,
                 WarehouseIngredients = warehouse.WarehouseIngredients
             .ToDictionary(recII => recII.IngredientId,
