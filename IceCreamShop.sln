@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.32106.194
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IceCreamShopView", "IceCreamShopView\IceCreamShopView.csproj", "{FE5F4EEB-D845-4CAF-A48C-70065AC3F50D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CBF5FE06-665C-428C-A04F-806CD8847E6F} = {CBF5FE06-665C-428C-A04F-806CD8847E6F}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IceCreamShopContracts", "IceCreamShopContracts\IceCreamShopContracts.csproj", "{4011F24F-C4FF-4E0D-B2B5-46FB2525092D}"
 EndProject
