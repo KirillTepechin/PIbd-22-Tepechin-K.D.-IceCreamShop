@@ -8,14 +8,16 @@ using System.Threading.Tasks;
 
 namespace IceCreamShopDatabaseImplement.Models
 {
-    public class Ingredient
+    public class Warehouse
     {
         public int Id { get; set; }
         [Required]
-        public string IngredientName { get; set; }
-        [ForeignKey("IngredientId")]
-        public virtual List<IceCreamIngredient> IceCreamIngredients { get; set; }
-        [ForeignKey("IngredientId")]
-        public virtual List<WarehouseIngredient> WarehouseIngredients { get; set; }
+        public string WarehouseName { get; set; }
+        [Required]
+        public string ResponsiblePerson { get; set; }
+        [Required]
+        public DateTime DateCreate { get; set; }
+        [ForeignKey("WarehouseId")]
+        public List<WarehouseIngredient> WarehouseIngredients { get; set; }
     }
 }

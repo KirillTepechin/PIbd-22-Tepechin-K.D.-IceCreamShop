@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IceCreamShopDatabaseImplement.Migrations
 {
     [DbContext(typeof(IceCreamShopDatabase))]
-    [Migration("20220303085637_InitialCreate")]
+    [Migration("20220311205154_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -113,6 +113,54 @@ namespace IceCreamShopDatabaseImplement.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("IceCreamShopDatabaseImplement.Models.Warehouse", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateCreate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ResponsiblePerson")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WarehouseName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Warehouses");
+                });
+
+            modelBuilder.Entity("IceCreamShopDatabaseImplement.Models.WarehouseIngredient", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IngredientId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WarehouseId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IngredientId");
+
+                    b.HasIndex("WarehouseId");
+
+                    b.ToTable("WarehouseIngredients");
+                });
+
             modelBuilder.Entity("IceCreamShopDatabaseImplement.Models.IceCreamIngredient", b =>
                 {
                     b.HasOne("IceCreamShopDatabaseImplement.Models.IceCream", "IceCream")
@@ -143,6 +191,25 @@ namespace IceCreamShopDatabaseImplement.Migrations
                     b.Navigation("IceCream");
                 });
 
+            modelBuilder.Entity("IceCreamShopDatabaseImplement.Models.WarehouseIngredient", b =>
+                {
+                    b.HasOne("IceCreamShopDatabaseImplement.Models.Ingredient", "Ingredient")
+                        .WithMany("WarehouseIngredients")
+                        .HasForeignKey("IngredientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("IceCreamShopDatabaseImplement.Models.Warehouse", "Warehouse")
+                        .WithMany("WarehouseIngredients")
+                        .HasForeignKey("WarehouseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Ingredient");
+
+                    b.Navigation("Warehouse");
+                });
+
             modelBuilder.Entity("IceCreamShopDatabaseImplement.Models.IceCream", b =>
                 {
                     b.Navigation("IceCreamIngredients");
@@ -153,6 +220,13 @@ namespace IceCreamShopDatabaseImplement.Migrations
             modelBuilder.Entity("IceCreamShopDatabaseImplement.Models.Ingredient", b =>
                 {
                     b.Navigation("IceCreamIngredients");
+
+                    b.Navigation("WarehouseIngredients");
+                });
+
+            modelBuilder.Entity("IceCreamShopDatabaseImplement.Models.Warehouse", b =>
+                {
+                    b.Navigation("WarehouseIngredients");
                 });
 #pragma warning restore 612, 618
         }
