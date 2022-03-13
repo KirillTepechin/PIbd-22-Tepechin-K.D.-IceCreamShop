@@ -33,6 +33,10 @@ namespace IceCreamShopView
             this.toolStripMenuItemManual = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemIngredient = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemIceCreams = new System.Windows.Forms.ToolStripMenuItem();
+            this.отчётыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemIngredientsList = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemIngredientIceCreams = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemOrdersList = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.buttonCreateOrder = new System.Windows.Forms.Button();
             this.buttonTakeOrderInWork = new System.Windows.Forms.Button();
@@ -46,7 +50,8 @@ namespace IceCreamShopView
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemManual});
+            this.toolStripMenuItemManual,
+            this.отчётыToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(930, 24);
@@ -65,16 +70,47 @@ namespace IceCreamShopView
             // toolStripMenuItemIngredient
             // 
             this.toolStripMenuItemIngredient.Name = "toolStripMenuItemIngredient";
-            this.toolStripMenuItemIngredient.Size = new System.Drawing.Size(148, 22);
+            this.toolStripMenuItemIngredient.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItemIngredient.Text = "Ингредиенты";
             this.toolStripMenuItemIngredient.Click += new System.EventHandler(this.toolStripMenuItemIngredient_Click);
             // 
             // toolStripMenuItemIceCreams
             // 
             this.toolStripMenuItemIceCreams.Name = "toolStripMenuItemIceCreams";
-            this.toolStripMenuItemIceCreams.Size = new System.Drawing.Size(148, 22);
+            this.toolStripMenuItemIceCreams.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItemIceCreams.Text = "Мороженое";
             this.toolStripMenuItemIceCreams.Click += new System.EventHandler(this.toolStripMenuItemIceCreams_Click);
+            // 
+            // отчётыToolStripMenuItem
+            // 
+            this.отчётыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemIngredientsList,
+            this.toolStripMenuItemIngredientIceCreams,
+            this.toolStripMenuItemOrdersList});
+            this.отчётыToolStripMenuItem.Name = "отчётыToolStripMenuItem";
+            this.отчётыToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.отчётыToolStripMenuItem.Text = "Отчёты";
+            // 
+            // toolStripMenuItemIngredientsList
+            // 
+            this.toolStripMenuItemIngredientsList.Name = "toolStripMenuItemIngredientsList";
+            this.toolStripMenuItemIngredientsList.Size = new System.Drawing.Size(238, 22);
+            this.toolStripMenuItemIngredientsList.Text = "Список ингредиентов";
+            this.toolStripMenuItemIngredientsList.Click += new System.EventHandler(this.ToolStripMenuItemIngredientsList_Click);
+            // 
+            // toolStripMenuItemIngredientIceCreams
+            // 
+            this.toolStripMenuItemIngredientIceCreams.Name = "toolStripMenuItemIngredientIceCreams";
+            this.toolStripMenuItemIngredientIceCreams.Size = new System.Drawing.Size(238, 22);
+            this.toolStripMenuItemIngredientIceCreams.Text = "Ингредиенты по мороженым";
+            this.toolStripMenuItemIngredientIceCreams.Click += new System.EventHandler(this.toolStripMenuItemIngredientIceCreams_Click);
+            // 
+            // toolStripMenuItemOrdersList
+            // 
+            this.toolStripMenuItemOrdersList.Name = "toolStripMenuItemOrdersList";
+            this.toolStripMenuItemOrdersList.Size = new System.Drawing.Size(238, 22);
+            this.toolStripMenuItemOrdersList.Text = "Список заказов";
+            this.toolStripMenuItemOrdersList.Click += new System.EventHandler(this.toolStripMenuItemOrdersList_Click);
             // 
             // dataGridView
             // 
@@ -172,5 +208,9 @@ namespace IceCreamShopView
         private System.Windows.Forms.Button buttonOrderReady;
         private System.Windows.Forms.Button buttonIssuedOrder;
         private System.Windows.Forms.Button buttonUpdate;
+        private System.Windows.Forms.ToolStripMenuItem отчётыToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemIngredientsList;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemIngredientIceCreams;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemOrdersList;
     }
 }

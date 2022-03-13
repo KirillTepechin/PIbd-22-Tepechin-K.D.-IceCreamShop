@@ -15,12 +15,13 @@ namespace IceCreamShopView
 {
     public partial class FormMain : Form
     {
+        private readonly IReportLogic _reportLogic;
         private readonly IOrderLogic _orderLogic;
-        public FormMain(IOrderLogic orderLogic)
+        public FormMain(IOrderLogic orderLogic, IReportLogic reportLogic)
         {
             InitializeComponent();
             _orderLogic = orderLogic;
-
+            _reportLogic = reportLogic;
         }
 
         private void toolStripMenuItemIngredient_Click(object sender, EventArgs e)
@@ -133,6 +134,32 @@ namespace IceCreamShopView
                    MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private void ToolStripMenuItemIngredientsList_Click(object sender, EventArgs e)
+        {
+            using var dialog = new SaveFileDialog { Filter = "docx|*.docx" };
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                _reportLogic.SaveIngredientsToWordFile(new ReportBindingModel
+                {
+                    FileName = dialog.FileName
+                });
+                MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+            }
+        }
+
+        private void toolStripMenuItemIngredientIceCreams_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormReportIceCreamIngredients>();
+            form.ShowDialog();
+        }
+
+        private void toolStripMenuItemOrdersList_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormReportOrders>();
+            form.ShowDialog();
         }
     }
 }
