@@ -31,8 +31,8 @@ namespace IceCreamShopView
         {
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.buttonSaveToExcel = new System.Windows.Forms.Button();
-            this.Ingredient = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IceCream = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ingredient = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Count = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -42,8 +42,8 @@ namespace IceCreamShopView
             this.dataGridView.BackgroundColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Ingredient,
             this.IceCream,
+            this.Ingredient,
             this.Count});
             this.dataGridView.Location = new System.Drawing.Point(12, 68);
             this.dataGridView.Name = "dataGridView";
@@ -61,17 +61,17 @@ namespace IceCreamShopView
             this.buttonSaveToExcel.UseVisualStyleBackColor = true;
             this.buttonSaveToExcel.Click += new System.EventHandler(this.buttonSaveToExcel_Click);
             // 
-            // Ingredient
-            // 
-            this.Ingredient.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Ingredient.HeaderText = "Ингредиент";
-            this.Ingredient.Name = "Ingredient";
-            // 
             // IceCream
             // 
             this.IceCream.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.IceCream.HeaderText = "Мороженое";
             this.IceCream.Name = "IceCream";
+            // 
+            // Ingredient
+            // 
+            this.Ingredient.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Ingredient.HeaderText = "Ингредиент";
+            this.Ingredient.Name = "Ingredient";
             // 
             // Count
             // 
@@ -96,9 +96,9 @@ namespace IceCreamShopView
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ingredient;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IceCream;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Count;
         private System.Windows.Forms.Button buttonSaveToExcel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IceCream;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ingredient;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Count;
     }
 }

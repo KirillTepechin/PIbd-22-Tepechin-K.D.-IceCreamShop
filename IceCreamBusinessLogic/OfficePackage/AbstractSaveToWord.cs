@@ -23,11 +23,14 @@ namespace IceCreamShopBusinessLogic.OfficePackage
                     JustificationType = WordJustificationType.Center
                 }
             });
-            foreach (var ingr in info.Ingredients)
+            string tab = ":    ";
+            foreach (var iceCream in info.IceCreams)
             {
                 CreateParagraph(new WordParagraph
                 {
-                    Texts = new List<(string, WordTextProperties)> { (ingr.IngredientName, new WordTextProperties { Size = "24", }) },
+                    Texts = new List<(string, WordTextProperties)> { (iceCream.IceCreamName, new WordTextProperties { Size = "24", Bold = true}),
+                                                                      (tab, new WordTextProperties{ Size ="24", }),
+                                                                      (iceCream.Price.ToString(), new WordTextProperties{ Size ="24", }) },
                     TextProperties = new WordTextProperties
                     {
                         Size = "24",

@@ -136,12 +136,12 @@ namespace IceCreamShopView
             }
         }
 
-        private void ToolStripMenuItemIngredientsList_Click(object sender, EventArgs e)
+        private void toolStripMenuItemIceCreamsList_Click(object sender, EventArgs e)
         {
             using var dialog = new SaveFileDialog { Filter = "docx|*.docx" };
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                _reportLogic.SaveIngredientsToWordFile(new ReportBindingModel
+                _reportLogic.SaveIceCreamsToWordFile(new ReportBindingModel
                 {
                     FileName = dialog.FileName
                 });
@@ -150,7 +150,7 @@ namespace IceCreamShopView
             }
         }
 
-        private void toolStripMenuItemIngredientIceCreams_Click(object sender, EventArgs e)
+        private void toolStripMenuItemIceCreamIngredient_Click(object sender, EventArgs e)
         {
             var form = Program.Container.Resolve<FormReportIceCreamIngredients>();
             form.ShowDialog();
@@ -161,5 +161,6 @@ namespace IceCreamShopView
             var form = Program.Container.Resolve<FormReportOrders>();
             form.ShowDialog();
         }
+
     }
 }

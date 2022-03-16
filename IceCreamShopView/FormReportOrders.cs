@@ -21,7 +21,7 @@ namespace IceCreamShopView
                  Dock = DockStyle.Fill
             };
             reportViewer.LocalReport.LoadReportDefinition(new
-           FileStream("F:\\Технология программирования гит\\IceCreamShop\\IceCreamShopView\\Report.rdlc", FileMode.Open));
+           FileStream("ReportOrders.rdlc", FileMode.Open));
             Controls.Clear();
             Controls.Add(reportViewer);
             Controls.Add(panel);

@@ -32,8 +32,8 @@ namespace IceCreamShopView
                     dataGridView.Rows.Clear();
                     foreach (var elem in dict)
                     {
-                        dataGridView.Rows.Add(new object[] { elem.IngredientName, "", "" });
-                        foreach (var listElem in elem.IceCreams)
+                        dataGridView.Rows.Add(new object[] { elem.IceCreamName, "", "" });
+                        foreach (var listElem in elem.Ingredients)
                         {
                             dataGridView.Rows.Add(new object[] { "", listElem.Item1, listElem.Item2 });
                         }

@@ -36,11 +36,11 @@ namespace IceCreamShopBusinessLogic.OfficePackage
                 {
                     ColumnName = "A",
                     RowIndex = rowIndex,
-                    Text = ii.IngredientName,
+                    Text = ii.IceCreamName,
                     StyleInfo = ExcelStyleInfoType.Text
                 });
                 rowIndex++;
-                foreach (var iceCream in ii.IceCreams)
+                foreach (var iceCream in ii.Ingredients)
                 {
                     InsertCellInWorksheet(new ExcelCellParameters
                     {

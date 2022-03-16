@@ -41,7 +41,7 @@ namespace IceCreamShopView
             // 
             // dateTimePickerFrom
             // 
-            this.dateTimePickerFrom.Location = new System.Drawing.Point(27, 3);
+            this.dateTimePickerFrom.Location = new System.Drawing.Point(37, 3);
             this.dateTimePickerFrom.Name = "dateTimePickerFrom";
             this.dateTimePickerFrom.Size = new System.Drawing.Size(200, 23);
             this.dateTimePickerFrom.TabIndex = 0;
@@ -55,7 +55,7 @@ namespace IceCreamShopView
             // 
             // buttonMake
             // 
-            this.buttonMake.Location = new System.Drawing.Point(543, 3);
+            this.buttonMake.Location = new System.Drawing.Point(499, 3);
             this.buttonMake.Name = "buttonMake";
             this.buttonMake.Size = new System.Drawing.Size(105, 23);
             this.buttonMake.TabIndex = 2;
@@ -65,7 +65,7 @@ namespace IceCreamShopView
             // 
             // buttonToPdf
             // 
-            this.buttonToPdf.Location = new System.Drawing.Point(793, 3);
+            this.buttonToPdf.Location = new System.Drawing.Point(788, 5);
             this.buttonToPdf.Name = "buttonToPdf";
             this.buttonToPdf.Size = new System.Drawing.Size(75, 23);
             this.buttonToPdf.TabIndex = 3;
@@ -85,7 +85,7 @@ namespace IceCreamShopView
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(243, 7);
+            this.label2.Location = new System.Drawing.Point(243, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(21, 15);
             this.label2.TabIndex = 5;
@@ -93,22 +93,23 @@ namespace IceCreamShopView
             // 
             // panel
             // 
-            this.panel.Controls.Add(this.buttonMake);
-            this.panel.Controls.Add(this.label2);
-            this.panel.Controls.Add(this.dateTimePickerFrom);
-            this.panel.Controls.Add(this.label1);
-            this.panel.Controls.Add(this.dateTimePickerTo);
             this.panel.Controls.Add(this.buttonToPdf);
-            this.panel.Location = new System.Drawing.Point(12, 3);
+            this.panel.Controls.Add(this.buttonMake);
+            this.panel.Controls.Add(this.label1);
+            this.panel.Controls.Add(this.dateTimePickerFrom);
+            this.panel.Controls.Add(this.label2);
+            this.panel.Controls.Add(this.dateTimePickerTo);
+            this.panel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel.Location = new System.Drawing.Point(0, 0);
             this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(874, 32);
+            this.panel.Size = new System.Drawing.Size(899, 33);
             this.panel.TabIndex = 6;
             // 
             // FormReportOrders
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(889, 450);
+            this.ClientSize = new System.Drawing.Size(899, 450);
             this.Controls.Add(this.panel);
             this.Name = "FormReportOrders";
             this.Text = "FormReportOrders";

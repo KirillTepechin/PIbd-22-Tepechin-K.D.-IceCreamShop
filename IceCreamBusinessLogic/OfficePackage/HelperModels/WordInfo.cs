@@ -11,6 +11,6 @@ namespace IceCreamShopBusinessLogic.OfficePackage.HelperModels
     {
         public string FileName { get; set; }
         public string Title { get; set; }
-        public List<IngredientViewModel> Ingredients { get; set; }
+        public List<IceCreamViewModel> IceCreams { get; set; }
     }
 }

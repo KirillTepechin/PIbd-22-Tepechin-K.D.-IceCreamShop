@@ -14,7 +14,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.SqlServer.Types" Version="14.0.1016.290" />
-    <PackageReference Include="ReportViewerCore.WinForms" Version="15.1.15" />
+    <PackageReference Include="ReportViewerCore.WinForms" Version="15.1.16" />
     <PackageReference Include="Unity" Version="5.11.10" />
   </ItemGroup>
 
@@ -39,6 +39,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\DataSources\" />
   </ItemGroup>
 
 </Project>

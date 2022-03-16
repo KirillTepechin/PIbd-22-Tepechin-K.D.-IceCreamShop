@@ -8,8 +8,8 @@ namespace IceCreamShopContracts.ViewModels
 {
     public class ReportIceCreamIngredientViewModel
     {
-        public string IngredientName { get; set; }
+        public string IceCreamName { get; set; }
         public int TotalCount { get; set; }
-        public List<Tuple<string, int>> IceCreams { get; set; }
+        public List<Tuple<string, int>> Ingredients { get; set; }
     }
 }

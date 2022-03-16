@@ -41,6 +41,12 @@ order.IceCreamName, order.Count.ToString(), order.Sum.ToString(), order.Status.T
                     ParagraphAlignment = PdfParagraphAlignmentType.Left
                 });
             }
+            decimal sum = info.Orders.Sum(order => order.Sum);
+            CreateParagraph(new PdfParagraph
+            {
+                Text = $"Итого: { sum }",
+                Style = "Normal"
+            });
             SavePdf(info);
         }
         /// <summary>/// Создание doc-файла

@@ -35,26 +35,20 @@ namespace IceCreamShopBusinessLogic.BusinessLogics
         /// </summary>/// <returns></returns>
         public List<ReportIceCreamIngredientViewModel> GetIceCreamIngredient()
         {
-            var ingredients = _ingredientStorage.GetFullList();
             var iceCreams = _iceCreamStorage.GetFullList();
             var list = new List<ReportIceCreamIngredientViewModel>();
-            foreach (var ingr in ingredients)
+            foreach (var ic in iceCreams)
             {
                 var record = new ReportIceCreamIngredientViewModel
                 {
-                    IngredientName = ingr.IngredientName,
-                    IceCreams = new List<Tuple<string, int>>(),
+                    IceCreamName = ic.IceCreamName,
+                    Ingredients = new List<Tuple<string, int>>(),
                     TotalCount = 0
                 };
-                foreach (var iceCream in iceCreams)
+                foreach (var ingr in ic.IceCreamIngredients)
                 {
-                    if (iceCream.IceCreamIngredients.ContainsKey(ingr.Id))
-                    {
-                        record.IceCreams.Add(new Tuple<string, int>(iceCream.IceCreamName,
-                       iceCream.IceCreamIngredients[ingr.Id].Item2));
-                        record.TotalCount +=
-                       iceCream.IceCreamIngredients[ingr.Id].Item2;
-                    }
+                    record.Ingredients.Add(new Tuple<string, int>(ingr.Value.Item1, ingr.Value.Item2));
+                    record.TotalCount += ingr.Value.Item2;
                 }
                 list.Add(record);
             }
@@ -87,13 +81,13 @@ namespace IceCreamShopBusinessLogic.BusinessLogics
         /// Сохранение компонент в файл-Word
         /// </summary>
         /// <param name="model"></param>
-        public void SaveIngredientsToWordFile(ReportBindingModel model)
+        public void SaveIceCreamsToWordFile(ReportBindingModel model)
         {
             _saveToWord.CreateDoc(new WordInfo
             {
                 FileName = model.FileName,
-                Title = "Список ингредиентов",
-                Ingredients = _ingredientStorage.GetFullList()
+                Title = "Список мороженого",
+                IceCreams = _iceCreamStorage.GetFullList()
             });
         }
         /// <summary>
@@ -105,7 +99,7 @@ namespace IceCreamShopBusinessLogic.BusinessLogics
             _saveToExcel.CreateReport(new ExcelInfo
             {
                 FileName = model.FileName,
-                Title = "Список ингредиентов",
+                Title = "Список мороженого",
                 IceCreamIngredients = GetIceCreamIngredient()
             });
         }

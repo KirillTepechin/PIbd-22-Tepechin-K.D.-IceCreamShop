@@ -25,7 +25,7 @@ namespace IceCreamShopContracts.BusinessLogicsContracts
         /// Сохранение компонент в файл-Word
         /// </summary>
         /// <param name="model"></param>
-        void SaveIngredientsToWordFile(ReportBindingModel model);
+        void SaveIceCreamsToWordFile(ReportBindingModel model);
         /// <summary>
         /// Сохранение компонент с указаеним продуктов в файл-Excel
         /// </summary>
