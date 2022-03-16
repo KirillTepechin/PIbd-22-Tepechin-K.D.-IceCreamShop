@@ -58,7 +58,7 @@ namespace IceCreamShopListImplement.Implements
             List<OrderViewModel> result = new List<OrderViewModel>();
             foreach (var order in source.Orders)
             {
-                if (order.IceCreamId == model.IceCreamId)
+                if (order.IceCreamId == model.IceCreamId || order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo)
                 {
                     result.Add(CreateModel(order));
                 }

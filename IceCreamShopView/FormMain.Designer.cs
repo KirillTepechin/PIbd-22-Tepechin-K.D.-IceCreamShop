@@ -33,6 +33,10 @@ namespace IceCreamShopView
             this.toolStripMenuItemManual = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemIngredients = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemIceCreams = new System.Windows.Forms.ToolStripMenuItem();
+            this.отчётыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemIceCreamsList = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemIceCreamIngredients = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemOrdersList = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemWarehouses = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemReplenish = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView = new System.Windows.Forms.DataGridView();
@@ -48,6 +52,8 @@ namespace IceCreamShopView
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemManual,
+            this.отчётыToolStripMenuItem});
             this.toolStripMenuItemManual,
             this.toolStripMenuItemReplenish});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -79,6 +85,37 @@ namespace IceCreamShopView
             this.toolStripMenuItemIceCreams.Size = new System.Drawing.Size(148, 22);
             this.toolStripMenuItemIceCreams.Text = "Мороженое";
             this.toolStripMenuItemIceCreams.Click += new System.EventHandler(this.toolStripMenuItemIceCreams_Click);
+            // 
+            // отчётыToolStripMenuItem
+            // 
+            this.отчётыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemIceCreamsList,
+            this.toolStripMenuItemIceCreamIngredients,
+            this.toolStripMenuItemOrdersList});
+            this.отчётыToolStripMenuItem.Name = "отчётыToolStripMenuItem";
+            this.отчётыToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.отчётыToolStripMenuItem.Text = "Отчёты";
+            // 
+            // toolStripMenuItemIceCreamsList
+            // 
+            this.toolStripMenuItemIceCreamsList.Name = "toolStripMenuItemIceCreamsList";
+            this.toolStripMenuItemIceCreamsList.Size = new System.Drawing.Size(238, 22);
+            this.toolStripMenuItemIceCreamsList.Text = "Список мороженого";
+            this.toolStripMenuItemIceCreamsList.Click += new System.EventHandler(this.toolStripMenuItemIceCreamsList_Click);
+            // 
+            // toolStripMenuItemIceCreamIngredients
+            // 
+            this.toolStripMenuItemIceCreamIngredients.Name = "toolStripMenuItemIceCreamIngredients";
+            this.toolStripMenuItemIceCreamIngredients.Size = new System.Drawing.Size(238, 22);
+            this.toolStripMenuItemIceCreamIngredients.Text = "Ингредиенты по мороженым";
+            this.toolStripMenuItemIceCreamIngredients.Click += new System.EventHandler(this.toolStripMenuItemIceCreamIngredient_Click);
+            // 
+            // toolStripMenuItemOrdersList
+            // 
+            this.toolStripMenuItemOrdersList.Name = "toolStripMenuItemOrdersList";
+            this.toolStripMenuItemOrdersList.Size = new System.Drawing.Size(238, 22);
+            this.toolStripMenuItemOrdersList.Text = "Список заказов";
+            this.toolStripMenuItemOrdersList.Click += new System.EventHandler(this.toolStripMenuItemOrdersList_Click);
             // 
             // toolStripMenuItemWarehouses
             // 
@@ -190,6 +227,10 @@ namespace IceCreamShopView
         private System.Windows.Forms.Button buttonOrderReady;
         private System.Windows.Forms.Button buttonIssuedOrder;
         private System.Windows.Forms.Button buttonUpdate;
+        private System.Windows.Forms.ToolStripMenuItem отчётыToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemIceCreamsList;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemIceCreamIngredients;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemOrdersList;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemWarehouses;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemReplenish;
     }
