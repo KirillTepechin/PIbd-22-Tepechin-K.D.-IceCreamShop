@@ -23,7 +23,7 @@ namespace IceCreamShopBusinessLogic.OfficePackage
                     JustificationType = WordJustificationType.Center
                 }
             });
-            string tab = ":    ";
+            string tab = ":\t";
             foreach (var iceCream in info.IceCreams)
             {
                 CreateParagraph(new WordParagraph
