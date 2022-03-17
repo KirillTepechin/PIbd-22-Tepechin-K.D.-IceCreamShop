@@ -143,7 +143,7 @@ namespace IceCreamShopBusinessLogic.OfficePackage.Implements
             if (table != null)
             {
                 var docTable = new Table();
-                //docTable.AppendChild(CreateTableProperties(table.TextProperties));
+                docTable.AppendChild(CreateTableProperties(table.TextProperties));
                 TableProperties tblProp = new TableProperties(
                     new TableBorders(
                         new TopBorder() { Val = new EnumValue<BorderValues>(BorderValues.Dashed), Size = 24 },
@@ -165,7 +165,7 @@ namespace IceCreamShopBusinessLogic.OfficePackage.Implements
                                                new TableCell(new Paragraph(new Run(new Text(run.ResponsiblePerson))),
                                                new TableCell(new Paragraph(new Run(new Text(run.DateCreate.ToString())))))));
                     
-                    docRun.AppendChild(properties);
+                    //docRun.AppendChild(properties);
                     docTable.Append(tr);
                 }
                 _docBody.AppendChild(docTable);
