@@ -15,17 +15,19 @@ namespace IceCreamShopBusinessLogic.BusinessLogics
         private readonly IIngredientStorage _ingredientStorage;
         private readonly IIceCreamStorage _iceCreamStorage;
         private readonly IOrderStorage _orderStorage;
+        private readonly IWarehouseStorage _warehouseStorage;
         private readonly AbstractSaveToExcel _saveToExcel;
         private readonly AbstractSaveToWord _saveToWord;
         private readonly AbstractSaveToPdf _saveToPdf;
         public ReportLogic(IIceCreamStorage iceCreamStorage, IIngredientStorage
-       ingredientStorage, IOrderStorage orderStorage,
+       ingredientStorage, IOrderStorage orderStorage, IWarehouseStorage warehouseStorage,
         AbstractSaveToExcel saveToExcel, AbstractSaveToWord saveToWord,
        AbstractSaveToPdf saveToPdf)
         {
             _iceCreamStorage = iceCreamStorage;
             _ingredientStorage = ingredientStorage;
             _orderStorage = orderStorage;
+            _warehouseStorage = warehouseStorage;
             _saveToExcel = saveToExcel;
             _saveToWord = saveToWord;
             _saveToPdf = saveToPdf;
@@ -116,6 +118,15 @@ namespace IceCreamShopBusinessLogic.BusinessLogics
                 DateFrom = model.DateFrom.Value,
                 DateTo = model.DateTo.Value,
                 Orders = GetOrders(model)
+            });
+        }
+        public void SaveWarehousesToWordFile(ReportBindingModel model)
+        {
+            _saveToWord.CreateDocWarehouse(new WordInfo
+            {
+                FileName = model.FileName,
+                Title = "Таблица складов",
+                Warehouses = _warehouseStorage.GetFullList()
             });
         }
     }

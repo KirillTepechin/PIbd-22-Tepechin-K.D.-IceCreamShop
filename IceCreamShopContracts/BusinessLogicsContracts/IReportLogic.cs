@@ -36,6 +36,6 @@ namespace IceCreamShopContracts.BusinessLogicsContracts
         /// </summary>
         /// <param name="model"></param>
         void SaveOrdersToPdfFile(ReportBindingModel model);
-
+        void SaveWarehousesToWordFile(ReportBindingModel model);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using IceCreamShopBusinessLogic.OfficePackage.HelperEnums;
 using IceCreamShopBusinessLogic.OfficePackage.HelperModels;
+using IceCreamShopContracts.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +41,25 @@ namespace IceCreamShopBusinessLogic.OfficePackage
             }
             SaveWord(info);
         }
+        public void CreateDocWarehouse(WordInfo info)
+        {
+            CreateWord(info);
+           
+           
+                CreateTable(new WordTable
+                {
+                    Texts = info.Warehouses,
+                    TextProperties = new WordTextProperties
+                    {
+                        Size = "24",
+                        JustificationType = WordJustificationType.Both
+                    }
+
+                });
+            
+            SaveWord(info);
+        }
+        protected abstract void CreateTable(WordTable row);
         /// <summary>
         /// Создание doc-файла
         /// </summary>
@@ -56,5 +76,6 @@ namespace IceCreamShopBusinessLogic.OfficePackage
         /// </summary>
         /// <param name="info"></param>
         protected abstract void SaveWord(WordInfo info);
+
     }
 }

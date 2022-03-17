@@ -15,6 +15,7 @@ namespace IceCreamShopBusinessLogic.OfficePackage.Implements
     {
         private WordprocessingDocument _wordDocument;
         private Body _docBody;
+        //private Table _docTable;
         /// <summary>
         /// Получение типа выравнивания
         /// </summary>
@@ -78,6 +79,28 @@ namespace IceCreamShopBusinessLogic.OfficePackage.Implements
             }
             return null;
         }
+        private static TableProperties CreateTableProperties(WordTextProperties
+       tableProperties)
+        {
+            if (tableProperties != null)
+            {
+                
+                
+                
+                var properties = new TableProperties();
+                properties.AppendChild(new Justification()
+                {
+                    Val = GetJustificationValues(tableProperties.JustificationType)
+                });
+                properties.AppendChild(new SpacingBetweenLines
+                {
+                    LineRule = LineSpacingRuleValues.Auto
+                });
+                properties.AppendChild(new Indentation());
+                return properties;
+            }
+            return null;
+        }
         protected override void CreateWord(WordInfo info)
         {
             _wordDocument = WordprocessingDocument.Create(info.FileName,
@@ -114,11 +137,46 @@ namespace IceCreamShopBusinessLogic.OfficePackage.Implements
                 _docBody.AppendChild(docParagraph);
             }
         }
+        protected override void CreateTable(WordTable table)
+        {
+
+            if (table != null)
+            {
+                var docTable = new Table();
+                //docTable.AppendChild(CreateTableProperties(table.TextProperties));
+                TableProperties tblProp = new TableProperties(
+                    new TableBorders(
+                        new TopBorder() { Val = new EnumValue<BorderValues>(BorderValues.Dashed), Size = 24 },
+                        new BottomBorder() { Val = new EnumValue<BorderValues>(BorderValues.Dashed), Size = 24 },
+                        new LeftBorder() { Val = new EnumValue<BorderValues>(BorderValues.Dashed), Size = 24 },
+                        new RightBorder() { Val = new EnumValue<BorderValues>(BorderValues.Dashed), Size = 24 },
+                        new InsideHorizontalBorder() { Val = new EnumValue<BorderValues>(BorderValues.Dashed), Size = 24 },
+                    new InsideVerticalBorder() { Val = new EnumValue<BorderValues>(BorderValues.Dashed), Size = 24 }
+                    )
+                );
+                docTable.AppendChild<TableProperties>(tblProp);
+                foreach (var run in table.Texts)
+                {
+                   
+                    var docRun = new Run();
+                    var properties = new RunProperties();
+                    
+                    TableRow tr = new TableRow(new TableCell(new Paragraph(new Run(new Text(run.WarehouseName))),
+                                               new TableCell(new Paragraph(new Run(new Text(run.ResponsiblePerson))),
+                                               new TableCell(new Paragraph(new Run(new Text(run.DateCreate.ToString())))))));
+                    
+                    docRun.AppendChild(properties);
+                    docTable.Append(tr);
+                }
+                _docBody.AppendChild(docTable);
+            }
+        }
         protected override void SaveWord(WordInfo info)
         {
             _docBody.AppendChild(CreateSectionProperties());
             _wordDocument.MainDocumentPart.Document.Save();
             _wordDocument.Close();
         }
+
     }
 }
