@@ -41,7 +41,9 @@ namespace IceCreamShopFileImplement.Implements
             {
                 return null;
             }
-            return source.Orders.Where(rec => rec.IceCreamId.ToString().Contains(model.IceCreamId.ToString())).Select(CreateModel).ToList();
+            return source.Orders.Where(rec => rec.IceCreamId.ToString().Contains(model.IceCreamId.ToString())
+                                       || rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
+                                       .Select(CreateModel).ToList();
         }
 
         public OrderViewModel GetElement(OrderBindingModel model)
