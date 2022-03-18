@@ -85,18 +85,46 @@ namespace IceCreamShopBusinessLogic.OfficePackage.Implements
             if (tableProperties != null)
             {
                 
-                
-                
-                var properties = new TableProperties();
-                properties.AppendChild(new Justification()
-                {
-                    Val = GetJustificationValues(tableProperties.JustificationType)
-                });
-                properties.AppendChild(new SpacingBetweenLines
-                {
-                    LineRule = LineSpacingRuleValues.Auto
-                });
-                properties.AppendChild(new Indentation());
+                var properties = new TableProperties(
+                 new TableBorders(
+                     new TopBorder()
+                     {
+                         Val =
+                         new EnumValue<BorderValues>(BorderValues.Single),
+                         Size = (uint)Convert.ToInt32(tableProperties.Size)
+                     },
+                     new BottomBorder()
+                     {
+                         Val =
+                         new EnumValue<BorderValues>(BorderValues.Single),
+                         Size = 6
+                     },
+                     new LeftBorder()
+                     {
+                         Val =
+                         new EnumValue<BorderValues>(BorderValues.Single),
+                         Size = 6
+                     },
+                     new RightBorder()
+                     {
+                         Val =
+                         new EnumValue<BorderValues>(BorderValues.Single),
+                         Size = 6
+                     },
+                     new InsideHorizontalBorder()
+                     {
+                         Val =
+                         new EnumValue<BorderValues>(BorderValues.Single),
+                         Size = 6
+                     },
+                     new InsideVerticalBorder()
+                     {
+                         Val =
+                         new EnumValue<BorderValues>(BorderValues.Single),
+                         Size = 6
+                     }
+                 )
+             );
                 return properties;
             }
             return null;
@@ -143,31 +171,39 @@ namespace IceCreamShopBusinessLogic.OfficePackage.Implements
             if (table != null)
             {
                 var docTable = new Table();
+
+
+                // Append the TableProperties object to the empty table.
                 docTable.AppendChild(CreateTableProperties(table.TextProperties));
-                TableProperties tblProp = new TableProperties(
-                    new TableBorders(
-                        new TopBorder() { Val = new EnumValue<BorderValues>(BorderValues.Dashed), Size = 24 },
-                        new BottomBorder() { Val = new EnumValue<BorderValues>(BorderValues.Dashed), Size = 24 },
-                        new LeftBorder() { Val = new EnumValue<BorderValues>(BorderValues.Dashed), Size = 24 },
-                        new RightBorder() { Val = new EnumValue<BorderValues>(BorderValues.Dashed), Size = 24 },
-                        new InsideHorizontalBorder() { Val = new EnumValue<BorderValues>(BorderValues.Dashed), Size = 24 },
-                    new InsideVerticalBorder() { Val = new EnumValue<BorderValues>(BorderValues.Dashed), Size = 24 }
-                    )
-                );
-                docTable.AppendChild<TableProperties>(tblProp);
-                foreach (var run in table.Texts)
+
+
+
+                foreach (var row in table.Texts)
                 {
-                   
-                    var docRun = new Run();
-                    var properties = new RunProperties();
+                    // Create a cell.
+                    TableCell tc1 = new TableCell();
+                    TableCell tc2 = new TableCell();
+                    TableCell tc3 = new TableCell();
+                    // Create a row.
+                    TableRow tr = new TableRow();
+                    // Specify the width property of the table cell.
+                    tc1.Append(new TableCellProperties(
+                        new TableCellWidth() { Type = TableWidthUnitValues.Dxa, Width = "2400" }));
+                    tc1.Append(new Paragraph(new Run(new Text(row.WarehouseName))));
+                    tc2.Append(new TableCellProperties(
+                        new TableCellWidth() { Type = TableWidthUnitValues.Dxa, Width = "2400" }));
+                    tc2.Append(new Paragraph(new Run(new Text(row.ResponsiblePerson))));
+                    tc3.Append(new TableCellProperties(
+                        new TableCellWidth() { Type = TableWidthUnitValues.Dxa, Width = "2400" }));
+                    tc3.Append(new Paragraph(new Run(new Text(row.DateCreate.ToString()))));
+                    tr.Append(tc1);
+                    tr.Append(tc2);
+                    tr.Append(tc3);
                     
-                    TableRow tr = new TableRow(new TableCell(new Paragraph(new Run(new Text(run.WarehouseName))),
-                                               new TableCell(new Paragraph(new Run(new Text(run.ResponsiblePerson))),
-                                               new TableCell(new Paragraph(new Run(new Text(run.DateCreate.ToString())))))));
-                    
-                    //docRun.AppendChild(properties);
                     docTable.Append(tr);
                 }
+                
+                
                 _docBody.AppendChild(docTable);
             }
         }
