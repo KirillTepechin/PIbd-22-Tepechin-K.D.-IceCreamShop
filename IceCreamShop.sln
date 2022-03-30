@@ -16,7 +16,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IceCreamShopListImplement",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IceCreamShopFileImplement", "IceCreamShopFileImplement\IceCreamShopFileImplement.csproj", "{6FE8C9A1-531B-4710-BB83-2866CC9206EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IceCreamShopDatabaseImplement", "IceCreamDatabaseImplement\IceCreamShopDatabaseImplement.csproj", "{CBF5FE06-665C-428C-A04F-806CD8847E6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IceCreamShopDatabaseImplement", "IceCreamDatabaseImplement\IceCreamShopDatabaseImplement.csproj", "{CBF5FE06-665C-428C-A04F-806CD8847E6F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IceCreamShopRestApi", "IceCreamShopRestApi\IceCreamShopRestApi.csproj", "{ECB8A576-C72D-43C3-95BB-C92B2367AE1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IceCreamShopClientApp", "IceCreamShopClientApp\IceCreamShopClientApp.csproj", "{4077F30E-908A-4AB6-B1B7-680B6162CACB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +52,14 @@ Global
 		{CBF5FE06-665C-428C-A04F-806CD8847E6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBF5FE06-665C-428C-A04F-806CD8847E6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBF5FE06-665C-428C-A04F-806CD8847E6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECB8A576-C72D-43C3-95BB-C92B2367AE1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECB8A576-C72D-43C3-95BB-C92B2367AE1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECB8A576-C72D-43C3-95BB-C92B2367AE1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECB8A576-C72D-43C3-95BB-C92B2367AE1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4077F30E-908A-4AB6-B1B7-680B6162CACB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4077F30E-908A-4AB6-B1B7-680B6162CACB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4077F30E-908A-4AB6-B1B7-680B6162CACB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4077F30E-908A-4AB6-B1B7-680B6162CACB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
