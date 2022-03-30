@@ -1,4 +1,5 @@
 ﻿using IceCreamShopBusinessLogic.OfficePackage;
+using IceCreamShopBusinessLogic.OfficePackage.HelperEnums;
 using IceCreamShopBusinessLogic.OfficePackage.HelperModels;
 using IceCreamShopContracts.BindingModels;
 using IceCreamShopContracts.BusinessLogicsContracts;
@@ -56,6 +57,27 @@ namespace IceCreamShopBusinessLogic.BusinessLogics
             }
             return list;
         }
+        public List<ReportWarhouseIngredientViewModel> GetWarhouseIngredient()
+        {
+            var warhouses = _warehouseStorage.GetFullList();
+            var list = new List<ReportWarhouseIngredientViewModel>();
+            foreach (var wh in warhouses)
+            {
+                var record = new ReportWarhouseIngredientViewModel
+                {
+                    WarhouseName = wh.WarehouseName,
+                    Ingredients = new List<Tuple<string, int>>(),
+                    TotalCount = 0
+                };
+                foreach (var ingr in wh.WarehouseIngredients)
+                {
+                    record.Ingredients.Add(new Tuple<string, int>(ingr.Value.Item1, ingr.Value.Item2));
+                    record.TotalCount += ingr.Value.Item2;
+                }
+                list.Add(record);
+            }
+            return list;
+        }
         /// <summary>
         /// Получение списка заказов за определенный период
         /// </summary>
@@ -79,6 +101,16 @@ namespace IceCreamShopBusinessLogic.BusinessLogics
             })
            .ToList();
         }
+        public List<ReportOrdersInfoViewModel> GetOrdersGroupByDate()
+        {
+            return _orderStorage.GetFullList().GroupBy(x => x.DateCreate.Date)
+            .Select(x => new ReportOrdersInfoViewModel
+            {
+                DateCreate = x.Key,
+                Count = x.Count(),
+                Sum = x.Sum(rec => rec.Sum),
+            }).ToList();
+        }
         /// <summary>
         /// Сохранение компонент в файл-Word
         /// </summary>
@@ -89,7 +121,8 @@ namespace IceCreamShopBusinessLogic.BusinessLogics
             {
                 FileName = model.FileName,
                 Title = "Список мороженого",
-                IceCreams = _iceCreamStorage.GetFullList()
+                IceCreams = _iceCreamStorage.GetFullList(),
+                DocumentType = WordDocumentType.Text
             });
         }
         /// <summary>
@@ -102,7 +135,8 @@ namespace IceCreamShopBusinessLogic.BusinessLogics
             {
                 FileName = model.FileName,
                 Title = "Список мороженого",
-                IceCreamIngredients = GetIceCreamIngredient()
+                IceCreamIngredients = GetIceCreamIngredient(),
+                SheetType = ExcelSheetType.Warhouse
             });
         }
         /// <summary>
@@ -117,17 +151,41 @@ namespace IceCreamShopBusinessLogic.BusinessLogics
                 Title = "Список заказов",
                 DateFrom = model.DateFrom.Value,
                 DateTo = model.DateTo.Value,
-                Orders = GetOrders(model)
+                Orders = GetOrders(model),
+                Type = PdfReportType.Filtered
+            });
+        }
+        public void SaveOrdersInfoToPdfFile(ReportBindingModel model)
+        {
+            _saveToPdf.CreateDoc(new PdfInfo
+            {
+                FileName = model.FileName,
+                Title = "Информация о заказах",
+                OrdersInfo = GetOrdersGroupByDate(),
+                Type = PdfReportType.All
             });
         }
         public void SaveWarehousesToWordFile(ReportBindingModel model)
         {
-            _saveToWord.CreateDocWarehouse(new WordInfo
+            _saveToWord.CreateDoc(new WordInfo
             {
                 FileName = model.FileName,
                 Title = "Таблица складов",
-                Warehouses = _warehouseStorage.GetFullList()
+                Warehouses = _warehouseStorage.GetFullList(),
+                DocumentType = WordDocumentType.Table
             });
         }
+        public void SaveWarhouseIngredientToExcelFile(ReportBindingModel model)
+        {
+            _saveToExcel.CreateReport(new ExcelInfo
+            {
+                FileName = model.FileName,
+                Title = "Список складов",
+                WarhouseIngredients = GetWarhouseIngredient(),
+                SheetType = ExcelSheetType.Warhouse
+            });
+        }
+
+      
     }
 }

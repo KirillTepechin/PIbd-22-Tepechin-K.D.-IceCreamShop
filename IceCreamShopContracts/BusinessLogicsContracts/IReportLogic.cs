@@ -25,6 +25,7 @@ namespace IceCreamShopContracts.BusinessLogicsContracts
         /// Сохранение компонент в файл-Word
         /// </summary>
         /// <param name="model"></param>
+        List<ReportOrdersInfoViewModel> GetOrdersGroupByDate();
         void SaveIceCreamsToWordFile(ReportBindingModel model);
         /// <summary>
         /// Сохранение компонент с указаеним продуктов в файл-Excel
@@ -36,6 +37,9 @@ namespace IceCreamShopContracts.BusinessLogicsContracts
         /// </summary>
         /// <param name="model"></param>
         void SaveOrdersToPdfFile(ReportBindingModel model);
+        void SaveOrdersInfoToPdfFile(ReportBindingModel model);
+        List<ReportWarhouseIngredientViewModel> GetWarhouseIngredient();
         void SaveWarehousesToWordFile(ReportBindingModel model);
+        void SaveWarhouseIngredientToExcelFile(ReportBindingModel model);
     }
 }

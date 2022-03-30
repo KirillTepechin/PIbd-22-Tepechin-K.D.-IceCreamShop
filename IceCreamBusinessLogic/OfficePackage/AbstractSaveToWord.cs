@@ -13,53 +13,56 @@ namespace IceCreamShopBusinessLogic.OfficePackage
     {
         public void CreateDoc(WordInfo info)
         {
-
-            CreateWord(info);
-            CreateParagraph(new WordParagraph
+            if (info.DocumentType == WordDocumentType.Text)
             {
-                Texts = new List<(string, WordTextProperties)> { (info.Title, new WordTextProperties { Bold = true, Size = "24", }) },
-                TextProperties = new WordTextProperties
-                {
-                    Size = "24",
-                    JustificationType = WordJustificationType.Center
-                }
-            });
-            string tab = ":\t";
-            foreach (var iceCream in info.IceCreams)
-            {
+                CreateWord(info);
                 CreateParagraph(new WordParagraph
                 {
-                    Texts = new List<(string, WordTextProperties)> { (iceCream.IceCreamName, new WordTextProperties { Size = "24", Bold = true}),
+                    Texts = new List<(string, WordTextProperties)> { (info.Title, new WordTextProperties { Bold = true, Size = "24", }) },
+                    TextProperties = new WordTextProperties
+                    {
+                        Size = "24",
+                        JustificationType = WordJustificationType.Center
+                    }
+                });
+
+                string tab = ":\t";
+                foreach (var iceCream in info.IceCreams)
+                {
+                    CreateParagraph(new WordParagraph
+                    {
+                        Texts = new List<(string, WordTextProperties)> { (iceCream.IceCreamName, new WordTextProperties { Size = "24", Bold = true}),
                                                                       (tab, new WordTextProperties{ Size ="24", }),
                                                                       (iceCream.Price.ToString(), new WordTextProperties{ Size ="24", }) },
-                    TextProperties = new WordTextProperties
-                    {
-                        Size = "24",
-                        JustificationType = WordJustificationType.Both
-                    }
-                });
+                        TextProperties = new WordTextProperties
+                        {
+                            Size = "24",
+                            JustificationType = WordJustificationType.Both
+                        }
+                    });
+                }
+                SaveWord(info);
             }
-            SaveWord(info);
-        }
-        public void CreateDocWarehouse(WordInfo info)
-        {
-            CreateWord(info);
-           
-           
+            else
+            {
+                CreateWord(info);
+                
                 CreateTable(new WordTable
                 {
-                    Texts = info.Warehouses,
-                    TextProperties = new WordTextProperties
+                    Header = info.Title,
+                    Rows = info.Warehouses,
+                    TableProperties = new WordTableProperties
                     {
-                        Size = "24",
-                        JustificationType = WordJustificationType.Both
+                        TextSize = "24",
+                        BorderSize = "6",
+                        BorderType = WordBorderType.Single
                     }
-
                 });
-            
-            SaveWord(info);
+                
+                SaveWord(info);
+            }
         }
-        protected abstract void CreateTable(WordTable row);
+        protected abstract void CreateTable(WordTable table);
         /// <summary>
         /// Создание doc-файла
         /// </summary>

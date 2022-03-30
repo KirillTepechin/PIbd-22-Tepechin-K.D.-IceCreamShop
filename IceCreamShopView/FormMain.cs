@@ -185,5 +185,17 @@ namespace IceCreamShopView
                 }
             }
         }
+
+        private void toolStripMenuItemWarhouseIngredients_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormReportWarhouseIngredients>();
+            form.ShowDialog();
+        }
+
+        private void toolStripMenuItemOrdersInfo_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormReportOrdersInfo>();
+            form.ShowDialog();
+        }
     }
 }

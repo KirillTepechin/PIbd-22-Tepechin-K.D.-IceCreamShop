@@ -1,4 +1,5 @@
-﻿using IceCreamShopContracts.ViewModels;
+﻿using IceCreamShopBusinessLogic.OfficePackage.HelperEnums;
+using IceCreamShopContracts.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace IceCreamShopBusinessLogic.OfficePackage.HelperModels
     {
         public string FileName { get; set; }
         public string Title { get; set; }
+        public WordDocumentType DocumentType { get; set; }
         public List<IceCreamViewModel> IceCreams { get; set; }
         public List<WarehouseViewModel> Warehouses { get; set; }
     }

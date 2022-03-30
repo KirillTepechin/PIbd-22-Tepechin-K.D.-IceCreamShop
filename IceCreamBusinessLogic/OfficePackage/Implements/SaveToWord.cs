@@ -15,7 +15,6 @@ namespace IceCreamShopBusinessLogic.OfficePackage.Implements
     {
         private WordprocessingDocument _wordDocument;
         private Body _docBody;
-        //private Table _docTable;
         /// <summary>
         /// Получение типа выравнивания
         /// </summary>
@@ -29,6 +28,16 @@ namespace IceCreamShopBusinessLogic.OfficePackage.Implements
                 WordJustificationType.Both => JustificationValues.Both,
                 WordJustificationType.Center => JustificationValues.Center,
                 _ => JustificationValues.Left,
+            };
+        }
+        private static BorderValues GetBorderValues(WordBorderType
+       type)
+        {
+            return type switch
+            {
+                WordBorderType.Single => BorderValues.Single,
+                WordBorderType.Dashed => BorderValues.Dashed,
+                _ => BorderValues.Hearts
             };
         }
         /// <summary>
@@ -79,52 +88,51 @@ namespace IceCreamShopBusinessLogic.OfficePackage.Implements
             }
             return null;
         }
-        private static TableProperties CreateTableProperties(WordTextProperties
+        private static TableProperties CreateTableProperties(WordTableProperties
        tableProperties)
         {
             if (tableProperties != null)
             {
-                
                 var properties = new TableProperties(
-                 new TableBorders(
-                     new TopBorder()
-                     {
-                         Val =
-                         new EnumValue<BorderValues>(BorderValues.Single),
-                         Size = (uint)Convert.ToInt32(tableProperties.Size)
-                     },
-                     new BottomBorder()
-                     {
-                         Val =
-                         new EnumValue<BorderValues>(BorderValues.Single),
-                         Size = 6
-                     },
-                     new LeftBorder()
-                     {
-                         Val =
-                         new EnumValue<BorderValues>(BorderValues.Single),
-                         Size = 6
-                     },
-                     new RightBorder()
-                     {
-                         Val =
-                         new EnumValue<BorderValues>(BorderValues.Single),
-                         Size = 6
-                     },
-                     new InsideHorizontalBorder()
-                     {
-                         Val =
-                         new EnumValue<BorderValues>(BorderValues.Single),
-                         Size = 6
-                     },
-                     new InsideVerticalBorder()
-                     {
-                         Val =
-                         new EnumValue<BorderValues>(BorderValues.Single),
-                         Size = 6
-                     }
-                 )
-             );
+            
+                    new FontSize()
+                    {
+                        Val = tableProperties.TextSize
+                    },
+
+                    new TableBorders(
+                        new TopBorder()
+                        {
+                            Val = GetBorderValues(tableProperties.BorderType),
+                            Size = Convert.ToUInt32(tableProperties.BorderSize)
+                        },
+                        new BottomBorder()
+                        {
+                             Val = GetBorderValues(tableProperties.BorderType),
+                             Size = Convert.ToUInt32(tableProperties.BorderSize)
+                        },
+                        new LeftBorder()
+                        {
+                             Val = GetBorderValues(tableProperties.BorderType),
+                             Size = Convert.ToUInt32(tableProperties.BorderSize)
+                        },
+                        new RightBorder()
+                        {
+                            Val = GetBorderValues(tableProperties.BorderType),
+                            Size = Convert.ToUInt32(tableProperties.BorderSize)
+                        },
+                        new InsideHorizontalBorder()
+                        {
+                            Val = GetBorderValues(tableProperties.BorderType),
+                            Size = Convert.ToUInt32(tableProperties.BorderSize)
+                        },
+                        new InsideVerticalBorder()
+                        {
+                            Val = GetBorderValues(tableProperties.BorderType),
+                            Size = Convert.ToUInt32(tableProperties.BorderSize)
+                        }
+                    )
+                );
                 return properties;
             }
             return null;
@@ -172,41 +180,63 @@ namespace IceCreamShopBusinessLogic.OfficePackage.Implements
             {
                 var docTable = new Table();
 
+                docTable.AppendChild(CreateTableProperties(table.TableProperties));
 
-                // Append the TableProperties object to the empty table.
-                docTable.AppendChild(CreateTableProperties(table.TextProperties));
+                TableRow rowHeader = new TableRow();
 
+                TableCell cellHeader = new TableCell();
+                cellHeader.Append(new TableCellProperties(
+                    new TableCellWidth() { Type = TableWidthUnitValues.Dxa, Width = "7200" },
+                    new HorizontalMerge() { Val = MergedCellValues.Restart }));
 
+                WordTextProperties textProperties = new WordTextProperties() {
+                    JustificationType = WordJustificationType.Center
+                };
+                cellHeader.Append(new Paragraph(new Run(new Text(table.Header))));
+                cellHeader.GetFirstChild<Paragraph>().ParagraphProperties = CreateParagraphProperties(textProperties);
+                TableCell tmpCell1 = new TableCell();
+                tmpCell1.Append(new TableCellProperties(
+                    new HorizontalMerge() { Val = MergedCellValues.Continue }));
+                tmpCell1.Append(new Paragraph(new Run(new Text(""))));
 
-                foreach (var row in table.Texts)
+                TableCell tmpCell2 = new TableCell();
+                tmpCell2.Append(new TableCellProperties(
+                    new HorizontalMerge() { Val = MergedCellValues.Continue}));
+                tmpCell2.Append(new Paragraph(new Run(new Text(""))));
+
+                rowHeader.Append(cellHeader);
+                rowHeader.Append(tmpCell1);
+                rowHeader.Append(tmpCell2);
+                docTable.Append(rowHeader);
+                
+                foreach (var row in table.Rows)
                 {
-                    // Create a cell.
-                    TableCell tc1 = new TableCell();
-                    TableCell tc2 = new TableCell();
-                    TableCell tc3 = new TableCell();
-                    // Create a row.
-                    TableRow tr = new TableRow();
-                    // Specify the width property of the table cell.
-                    tc1.Append(new TableCellProperties(
-                        new TableCellWidth() { Type = TableWidthUnitValues.Dxa, Width = "2400" }));
-                    tc1.Append(new Paragraph(new Run(new Text(row.WarehouseName))));
-                    tc2.Append(new TableCellProperties(
-                        new TableCellWidth() { Type = TableWidthUnitValues.Dxa, Width = "2400" }));
-                    tc2.Append(new Paragraph(new Run(new Text(row.ResponsiblePerson))));
-                    tc3.Append(new TableCellProperties(
-                        new TableCellWidth() { Type = TableWidthUnitValues.Dxa, Width = "2400" }));
-                    tc3.Append(new Paragraph(new Run(new Text(row.DateCreate.ToString()))));
-                    tr.Append(tc1);
-                    tr.Append(tc2);
-                    tr.Append(tc3);
+                    TableCell cellName = new TableCell();
+                    TableCell cellPerson = new TableCell();
+                    TableCell cellDate = new TableCell();
                     
-                    docTable.Append(tr);
+                    TableRow rowData = new TableRow();
+                    
+                    cellName.Append(new TableCellProperties(
+                        new TableCellWidth() { Type = TableWidthUnitValues.Dxa, Width = "2400" }));
+                    cellName.Append(new Paragraph(new Run(new Text(row.WarehouseName))));
+                    cellPerson.Append(new TableCellProperties(
+                        new TableCellWidth() { Type = TableWidthUnitValues.Dxa, Width = "2400" }));
+                    cellPerson.Append(new Paragraph(new Run(new Text(row.ResponsiblePerson))));
+                    cellDate.Append(new TableCellProperties(
+                        new TableCellWidth() { Type = TableWidthUnitValues.Dxa, Width = "2400" }));
+                    cellDate.Append(new Paragraph(new Run(new Text(row.DateCreate.ToString()))));
+                    rowData.Append(cellName);
+                    rowData.Append(cellPerson);
+                    rowData.Append(cellDate);
+                    
+                    docTable.Append(rowData);
                 }
-                
-                
                 _docBody.AppendChild(docTable);
+
             }
         }
+       
         protected override void SaveWord(WordInfo info)
         {
             _docBody.AppendChild(CreateSectionProperties());

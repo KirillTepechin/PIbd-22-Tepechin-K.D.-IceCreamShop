@@ -30,43 +30,87 @@ namespace IceCreamShopBusinessLogic.OfficePackage
                 CellToName = "C1"
             });
             uint rowIndex = 2;
-            foreach (var ii in info.IceCreamIngredients)
+            if (info.SheetType == ExcelSheetType.IceCream)
             {
-                InsertCellInWorksheet(new ExcelCellParameters
-                {
-                    ColumnName = "A",
-                    RowIndex = rowIndex,
-                    Text = ii.IceCreamName,
-                    StyleInfo = ExcelStyleInfoType.Text
-                });
-                rowIndex++;
-                foreach (var iceCream in ii.Ingredients)
+                foreach (var ii in info.IceCreamIngredients)
                 {
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
-                        ColumnName = "B",
+                        ColumnName = "A",
                         RowIndex = rowIndex,
-                        Text = iceCream.Item1,
-                        StyleInfo = ExcelStyleInfoType.TextWithBroder
+                        Text = ii.IceCreamName,
+                        StyleInfo = ExcelStyleInfoType.Text
                     });
+                    rowIndex++;
+                    foreach (var iceCream in ii.Ingredients)
+                    {
+                        InsertCellInWorksheet(new ExcelCellParameters
+                        {
+                            ColumnName = "B",
+                            RowIndex = rowIndex,
+                            Text = iceCream.Item1,
+                            StyleInfo = ExcelStyleInfoType.TextWithBroder
+                        });
+                        InsertCellInWorksheet(new ExcelCellParameters
+                        {
+                            ColumnName = "C",
+                            RowIndex = rowIndex,
+                            Text = iceCream.Item2.ToString(),
+                            StyleInfo = ExcelStyleInfoType.TextWithBroder
+                        });
+                        rowIndex++;
+                    }
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
                         ColumnName = "C",
                         RowIndex = rowIndex,
-                        Text = iceCream.Item2.ToString(),
-                        StyleInfo = ExcelStyleInfoType.TextWithBroder
+                        Text = ii.TotalCount.ToString(),
+                        StyleInfo = ExcelStyleInfoType.Text
                     });
                     rowIndex++;
                 }
-                InsertCellInWorksheet(new ExcelCellParameters
-                {
-                    ColumnName = "C",
-                    RowIndex = rowIndex,
-                    Text = ii.TotalCount.ToString(),
-                    StyleInfo = ExcelStyleInfoType.Text
-                });
-                rowIndex++;
             }
+            else
+            {
+                foreach (var wi in info.WarhouseIngredients)
+                {
+                    InsertCellInWorksheet(new ExcelCellParameters
+                    {
+                        ColumnName = "A",
+                        RowIndex = rowIndex,
+                        Text = wi.WarhouseName,
+                        StyleInfo = ExcelStyleInfoType.Text
+                    });
+                    rowIndex++;
+                    foreach (var ingredient in wi.Ingredients)
+                    {
+                        InsertCellInWorksheet(new ExcelCellParameters
+                        {
+                            ColumnName = "B",
+                            RowIndex = rowIndex,
+                            Text = ingredient.Item1,
+                            StyleInfo = ExcelStyleInfoType.TextWithBroder
+                        });
+                        InsertCellInWorksheet(new ExcelCellParameters
+                        {
+                            ColumnName = "C",
+                            RowIndex = rowIndex,
+                            Text = ingredient.Item2.ToString(),
+                            StyleInfo = ExcelStyleInfoType.TextWithBroder
+                        });
+                        rowIndex++;
+                    }
+                    InsertCellInWorksheet(new ExcelCellParameters
+                    {
+                        ColumnName = "C",
+                        RowIndex = rowIndex,
+                        Text = wi.TotalCount.ToString(),
+                        StyleInfo = ExcelStyleInfoType.Text
+                    });
+                    rowIndex++;
+                }
+            }
+            
             SaveExcel(info);
         }
         /// <summary>

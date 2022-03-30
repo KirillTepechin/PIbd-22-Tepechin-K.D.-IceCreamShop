@@ -18,30 +18,58 @@ namespace IceCreamShopBusinessLogic.OfficePackage
                 Text = info.Title,
                 Style = "NormalTitle"
             });
-            CreateParagraph(new PdfParagraph
+            decimal sum = 0;
+            if (info.Type == PdfReportType.Filtered)
             {
-                Text = $"с { info.DateFrom.ToShortDateString() } по { info.DateTo.ToShortDateString() }", Style = "Normal"
-            });
-            CreateTable(new List<string> { "3cm", "6cm", "3cm", "2cm", "3cm" });
-            CreateRow(new PdfRowParameters
-            {
-                Texts = new List<string> { "Дата заказа", "Изделие", "Количество",
-"Сумма", "Статус" },
-                Style = "NormalTitle",
-                ParagraphAlignment = PdfParagraphAlignmentType.Center
-            });
-            foreach (var order in info.Orders)
-            {
+                CreateParagraph(new PdfParagraph
+                {
+                    Text = $"с { info.DateFrom.ToShortDateString() } по { info.DateTo.ToShortDateString() }",
+                    Style = "Normal"
+                });
+                CreateTable(new List<string> { "3cm", "6cm", "3cm", "2cm", "3cm" });
                 CreateRow(new PdfRowParameters
                 {
-                    Texts = new List<string> { order.DateCreate.ToShortDateString(),
+                    Texts = new List<string> { "Дата заказа", "Изделие", "Количество",
+"Сумма", "Статус" },
+                    Style = "NormalTitle",
+                    ParagraphAlignment = PdfParagraphAlignmentType.Center
+                });
+                foreach (var order in info.Orders)
+                {
+                    CreateRow(new PdfRowParameters
+                    {
+                        Texts = new List<string> { order.DateCreate.ToShortDateString(),
 order.IceCreamName, order.Count.ToString(), order.Sum.ToString(), order.Status.ToString()
 },
-                    Style = "Normal",
-                    ParagraphAlignment = PdfParagraphAlignmentType.Left
-                });
+                        Style = "Normal",
+                        ParagraphAlignment = PdfParagraphAlignmentType.Left
+                    });
+                }
+                sum = info.Orders.Sum(order => order.Sum);
             }
-            decimal sum = info.Orders.Sum(order => order.Sum);
+            else
+            {  
+                CreateTable(new List<string> { "3cm", "3cm", "2cm" });
+                CreateRow(new PdfRowParameters
+                {
+                    Texts = new List<string> { "Дата заказа", "Количество", "Сумма" },
+                    Style = "NormalTitle",
+                    ParagraphAlignment = PdfParagraphAlignmentType.Center
+                });
+                foreach (var order in info.OrdersInfo)
+                {
+                    CreateRow(new PdfRowParameters
+                    {
+                        Texts = new List<string> { order.DateCreate.ToShortDateString(),
+ order.Count.ToString(), order.Sum.ToString()
+},
+                        Style = "Normal",
+                        ParagraphAlignment = PdfParagraphAlignmentType.Left
+                    });
+                }
+                sum = info.OrdersInfo.Sum(order => order.Sum);
+            }
+            
             CreateParagraph(new PdfParagraph
             {
                 Text = $"Итого: { sum }",

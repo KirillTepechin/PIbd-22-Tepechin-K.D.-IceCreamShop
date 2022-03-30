@@ -1,4 +1,5 @@
-﻿using IceCreamShopContracts.ViewModels;
+﻿using IceCreamShopBusinessLogic.OfficePackage.HelperEnums;
+using IceCreamShopContracts.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,7 @@ namespace IceCreamShopBusinessLogic.OfficePackage.HelperModels
         public DateTime DateFrom { get; set; }
         public DateTime DateTo { get; set; }
         public List<ReportOrdersViewModel> Orders { get; set; }
+        public List<ReportOrdersInfoViewModel> OrdersInfo { get; set; }
+        public PdfReportType Type { get; set; }
     }
 }

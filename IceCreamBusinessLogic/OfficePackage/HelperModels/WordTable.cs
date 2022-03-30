@@ -9,7 +9,8 @@ namespace IceCreamShopBusinessLogic.OfficePackage.HelperModels
 {
     public class WordTable
     {
-        public List<WarehouseViewModel> Texts { get; set; }
-        public WordTextProperties TextProperties { get; set; }
+        public string Header { get; set; }
+        public List<WarehouseViewModel> Rows { get; set; }
+        public WordTableProperties TableProperties { get; set; }
     }
 }
