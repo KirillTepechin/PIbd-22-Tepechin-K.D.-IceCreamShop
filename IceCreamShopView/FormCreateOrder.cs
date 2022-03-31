@@ -17,12 +17,13 @@ namespace IceCreamShopView
     {
         private readonly IIceCreamLogic _logicI;
         private readonly IOrderLogic _logicO;
-
-        public FormCreateOrder(IIceCreamLogic logicI, IOrderLogic logicO)
+        private readonly IClientLogic _logicC;
+        public FormCreateOrder(IIceCreamLogic logicI, IOrderLogic logicO, IClientLogic logicC)
         {
             InitializeComponent();
             _logicI = logicI;
             _logicO = logicO;
+            _logicC = logicC;
         }
         private void CalcSum()
         {
@@ -59,6 +60,14 @@ namespace IceCreamShopView
                     comboBoxIceCream.DataSource = iceCreamList;
                     comboBoxIceCream.SelectedItem = null;
                 }
+                List<ClientViewModel> listC = _logicC.Read(null);
+                if (listC != null)
+                {
+                    comboBoxClient.DisplayMember = "ClientFIO";
+                    comboBoxClient.ValueMember = "Id";
+                    comboBoxClient.DataSource = listC;
+                    comboBoxClient.SelectedItem = null;
+                }
             }
             catch (Exception ex)
             {
@@ -81,13 +90,20 @@ namespace IceCreamShopView
                MessageBoxIcon.Error);
                 return;
             }
+            if (comboBoxClient.SelectedValue == null)
+            {
+                MessageBox.Show("Выберите клиента", "Ошибка", MessageBoxButtons.OK,
+               MessageBoxIcon.Error);
+                return;
+            }
             try
             {
                 _logicO.CreateOrder(new CreateOrderBindingModel
                 {
                     IceCreamId = Convert.ToInt32(comboBoxIceCream.SelectedValue),
                     Count = Convert.ToInt32(textBoxCount.Text),
-                    Sum = Convert.ToDecimal(textBoxSum.Text)
+                    Sum = Convert.ToDecimal(textBoxSum.Text),
+                    ClientId = Convert.ToInt32(comboBoxClient.SelectedValue)
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение",
                MessageBoxButtons.OK, MessageBoxIcon.Information);

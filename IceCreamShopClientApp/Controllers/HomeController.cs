@@ -113,25 +113,32 @@ namespace IceCreamShopClientApp.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Products =
+            ViewBag.IceCreams =
             APIClient.GetRequest<List<IceCreamViewModel>>("api/main/geticecreamlist");
             return View();
         }
         [HttpPost]
-        public void Create(int product, int count, decimal sum)
+        public void Create(int iceCream, int count, decimal sum)
         {
             if (count == 0 || sum == 0)
             {
                 return;
             }
             //TODO: прописать запрос
+            APIClient.PostRequest("api/main/createorder", new CreateOrderBindingModel
+            {
+                ClientId = Program.Client.Id,
+                IceCreamId = iceCream,
+                Count = count,
+                Sum = sum
+            });
             Response.Redirect("Index");
         }
         [HttpPost]
         public decimal Calc(decimal count, int iceCream)
         {
             IceCreamViewModel ic =
-            APIClient.GetRequest<IceCreamViewModel>($"api/main/geticeCream?iceCreamId={iceCream}");
+            APIClient.GetRequest<IceCreamViewModel>($"api/main/geticecream?iceCreamId={iceCream}");
             return count * ic.Price;
         }
     }

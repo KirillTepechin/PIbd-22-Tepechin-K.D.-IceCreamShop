@@ -1,8 +1,8 @@
-using IceCreamShopContracts.BindingModels;
+﻿using IceCreamShopContracts.BindingModels;
 using IceCreamShopContracts.BusinessLogicsContracts;
 using IceCreamShopContracts.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-namespace AbstractShopRestApi.Controllers
+namespace IceCreamShopRestApi.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]

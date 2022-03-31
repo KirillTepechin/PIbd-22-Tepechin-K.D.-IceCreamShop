@@ -4,6 +4,7 @@ using IceCreamShopBusinessLogic.OfficePackage;
 using IceCreamShopBusinessLogic.OfficePackage.Implements;
 using IceCreamShopContracts.BusinessLogicsContracts;
 using IceCreamShopContracts.StorageContracts;
+using IceCreamShopDatabaseImplement.Implements;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,6 +64,10 @@ namespace IceCreamShopView
                 HierarchicalLifetimeManager());
             currentContainer.RegisterType<AbstractSaveToWord, SaveToWord>(new
                 HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IClientLogic, ClientLogic>(new
+            HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IClientStorage, ClientStorage>(new
+            HierarchicalLifetimeManager());
             return currentContainer;
         }
     }

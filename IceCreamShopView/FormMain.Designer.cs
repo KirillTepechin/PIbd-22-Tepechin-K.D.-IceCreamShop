@@ -43,6 +43,7 @@ namespace IceCreamShopView
             this.buttonOrderReady = new System.Windows.Forms.Button();
             this.buttonIssuedOrder = new System.Windows.Forms.Button();
             this.buttonUpdate = new System.Windows.Forms.Button();
+            this.toolStripMenuItemClients = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -62,7 +63,8 @@ namespace IceCreamShopView
             // 
             this.toolStripMenuItemManual.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemIngredient,
-            this.toolStripMenuItemIceCreams});
+            this.toolStripMenuItemIceCreams,
+            this.toolStripMenuItemClients});
             this.toolStripMenuItemManual.Name = "toolStripMenuItemManual";
             this.toolStripMenuItemManual.Size = new System.Drawing.Size(94, 20);
             this.toolStripMenuItemManual.Text = "Справочники";
@@ -70,14 +72,14 @@ namespace IceCreamShopView
             // toolStripMenuItemIngredient
             // 
             this.toolStripMenuItemIngredient.Name = "toolStripMenuItemIngredient";
-            this.toolStripMenuItemIngredient.Size = new System.Drawing.Size(148, 22);
+            this.toolStripMenuItemIngredient.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItemIngredient.Text = "Ингредиенты";
             this.toolStripMenuItemIngredient.Click += new System.EventHandler(this.toolStripMenuItemIngredient_Click);
             // 
             // toolStripMenuItemIceCreams
             // 
             this.toolStripMenuItemIceCreams.Name = "toolStripMenuItemIceCreams";
-            this.toolStripMenuItemIceCreams.Size = new System.Drawing.Size(148, 22);
+            this.toolStripMenuItemIceCreams.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItemIceCreams.Text = "Мороженое";
             this.toolStripMenuItemIceCreams.Click += new System.EventHandler(this.toolStripMenuItemIceCreams_Click);
             // 
@@ -172,6 +174,13 @@ namespace IceCreamShopView
             this.buttonUpdate.UseVisualStyleBackColor = true;
             this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
             // 
+            // toolStripMenuItemClients
+            // 
+            this.toolStripMenuItemClients.Name = "toolStripMenuItemClients";
+            this.toolStripMenuItemClients.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItemClients.Text = "Клиенты";
+            this.toolStripMenuItemClients.Click += new System.EventHandler(this.toolStripMenuItemClients_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -212,5 +221,6 @@ namespace IceCreamShopView
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemIceCreamsList;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemIceCreamIngredients;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemOrdersList;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemClients;
     }
 }

@@ -14,7 +14,7 @@ namespace IceCreamShopContracts.BindingModels
     {
         public int? Id { get; set; }
         public int IceCreamId { get; set; }
-        public int ClientId { get; set; }
+        public int? ClientId { get; set; }
         public int Count { get; set; }
         public decimal Sum { get; set; }
         public OrderStatus Status { get; set; }

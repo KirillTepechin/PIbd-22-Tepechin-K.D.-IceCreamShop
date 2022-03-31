@@ -9,7 +9,7 @@ namespace IceCreamShopContracts.ViewModels
 {
     public class ClientViewModel
     {
-        public int? Id { get; set; }
+        public int Id { get; set; }
         [DisplayName("ФИО")]
         public string ClientFIO { get; set; }
         [DisplayName("Логин")]

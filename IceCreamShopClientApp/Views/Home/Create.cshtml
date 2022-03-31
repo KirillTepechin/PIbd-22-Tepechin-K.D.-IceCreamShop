@@ -1,31 +1,34 @@
-@{
-ViewData["Title"] = "Create";
+п»ї@{
+    ViewData["Title"] = "Create";
 }
 <div class="text-center">
-    <h2 class="display-4">Создание заказа</h2>
+    <h2 class="display-4">РЎРѕР·РґР°РЅРёРµ Р·Р°РєР°Р·Р°</h2>
 </div>
 <form method="post">
     <div class="row">
-        <div class="col-4">Мороженое:</div>
+        <div class="col-4">РњРѕСЂРѕР¶РµРЅРѕРµ:</div>
         <div class="col-8">
-            <select id="iceCream" name="iceCream" class="form-control" aspitems="@(new SelectList(@ViewBag.IceCreams,"Id", "IceCreamName"))"></select>
+            <select id="iceCream" name="iceCream" class="form-control" asp-items="@(new SelectList(@ViewBag.IceCreams,"Id", "IceCreamName"))"></select>
         </div>
     </div>
     <div class="row">
-        <div class="col-4">Количество:</div>
+        <div class="col-4">РљРѕР»РёС‡РµСЃС‚РІРѕ:</div>
         <div class="col-8"><input type="text" name="count" id="count" /></div>
     </div>
     <div class="row">
-        <div class="col-4">Сумма:</div>
+        <div class="col-4">РЎСѓРјРјР°:</div>
         <div class="col-8">
             <input type="text" id="sum" name="sum" readonly="true" />
         </div>
     </div>
     <div class="row">
         <div class="col-8"></div>
-        <div class="col-4"><input type="submit" value="Создать" class="btn btnprimary" /></div>
+        <div class="col-4">
+            <input type="submit" value="РЎРѕР·РґР°С‚СЊ" class="btn btn-primary" />
+        </div>
     </div>
 </form>
+
 <script>
     $('#iceCream').on('change', function () {
         check();
@@ -45,6 +48,6 @@ ViewData["Title"] = "Create";
                     $("#sum").val(result);
                 }
             });
-        };
+        }
     }
 </script>
