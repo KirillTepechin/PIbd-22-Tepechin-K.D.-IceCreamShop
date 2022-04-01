@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IceCreamDatabaseImplement
+namespace IceCreamShopDatabaseImplement
 {
     public class IceCreamShopDatabase : DbContext
     {
@@ -22,5 +22,6 @@ namespace IceCreamDatabaseImplement
         public virtual DbSet<IceCream> IceCreams { set; get; }
         public virtual DbSet<IceCreamIngredient> IceCreamIngredients { set; get; }
         public virtual DbSet<Order> Orders { set; get; }
+        public virtual DbSet<Client> Clients { set; get; }
     }
 }
