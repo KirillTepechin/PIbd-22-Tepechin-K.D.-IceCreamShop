@@ -66,5 +66,7 @@ namespace IceCreamShopView
         {
             LoadData();
         }
+
+       
     }
 }

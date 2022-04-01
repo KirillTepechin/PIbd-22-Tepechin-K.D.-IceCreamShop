@@ -12,6 +12,8 @@
     <ProjectReference Include="..\IceCreamBusinessLogic\IceCreamShopBusinessLogic.csproj" />
     <ProjectReference Include="..\IceCreamDatabaseImplement\IceCreamShopDatabaseImplement.csproj" />
     <ProjectReference Include="..\IceCreamShopContracts\IceCreamShopContracts.csproj" />
+    <ProjectReference Include="..\IceCreamShopFileImplement\IceCreamShopFileImplement.csproj" />
+    <ProjectReference Include="..\IceCreamShopListImplement\IceCreamShopListImplement.csproj" />
   </ItemGroup>
 
 </Project>

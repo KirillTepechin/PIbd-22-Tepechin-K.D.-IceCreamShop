@@ -14,14 +14,17 @@ namespace IceCreamShopFileImplement
         private readonly string IngredientFileName = "Ingredient.xml";
         private readonly string OrderFileName = "Order.xml";
         private readonly string IceCreamFileName = "IceCream.xml";
+        private readonly string ClientFileName = "Client.xml";
         public List<Ingredient> Ingredients { get; set; }
         public List<Order> Orders { get; set; }
         public List<IceCream> IceCreams { get; set; }
+        public List<Client> Clients { get; set; }
         private FileDataListSingleton()
         {
             Ingredients = LoadIngredients();
             Orders = LoadOrders();
             IceCreams = LoadIceCreams();
+            Clients = LoadClients();
         }
         public static FileDataListSingleton GetInstance()
         {
@@ -36,6 +39,7 @@ namespace IceCreamShopFileImplement
             SaveIngredients();
             SaveOrders();
             SaveIceCreams();
+            SaveClients();
         }
         private List<Ingredient> LoadIngredients()
         {
@@ -107,6 +111,26 @@ namespace IceCreamShopFileImplement
             }
             return list;
         }
+        private List<Client> LoadClients()
+        {
+            var list = new List<Client>();
+            if (File.Exists(ClientFileName))
+            {
+                XDocument xDocument = XDocument.Load(ClientFileName);
+                var xElements = xDocument.Root.Elements("Client").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new Client
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        ClientFIO = elem.Element("ClientFIO").Value,
+                        Email = elem.Element("Email").Value,
+                        Password = elem.Element("Password").Value,
+                    });
+                }
+            }
+            return list;
+        }
         private void SaveIngredients()
         {
             if (Ingredients != null)
@@ -166,11 +190,29 @@ namespace IceCreamShopFileImplement
                 xDocument.Save(IceCreamFileName);
             }
         }
+        private void SaveClients()
+        {
+            if (Clients != null)
+            {
+                var xElement = new XElement("Clients");
+                foreach (var client in Clients)
+                {
+                    xElement.Add(new XElement("Client",
+                    new XAttribute("Id", client.Id),
+                    new XElement("ClientFIO", client.ClientFIO),
+                    new XElement("Email", client.Email),
+                    new XElement("Password", client.Password)));
+                }
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(ClientFileName);
+            }
+        }
         public static void Save()
         {
             GetInstance().SaveIngredients();
             GetInstance().SaveOrders();
             GetInstance().SaveIceCreams();
+            GetInstance().SaveClients();
         }
     }
 }

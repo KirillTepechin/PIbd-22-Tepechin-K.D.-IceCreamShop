@@ -47,18 +47,19 @@ namespace IceCreamShopView
             // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(698, 193);
+            this.buttonDelete.Location = new System.Drawing.Point(687, 182);
             this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(75, 23);
+            this.buttonDelete.Size = new System.Drawing.Size(86, 34);
             this.buttonDelete.TabIndex = 1;
             this.buttonDelete.Text = "Удалить";
             this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonUpdate_Click);
             // 
             // buttonUpdate
             // 
-            this.buttonUpdate.Location = new System.Drawing.Point(698, 235);
+            this.buttonUpdate.Location = new System.Drawing.Point(687, 235);
             this.buttonUpdate.Name = "buttonUpdate";
-            this.buttonUpdate.Size = new System.Drawing.Size(75, 23);
+            this.buttonUpdate.Size = new System.Drawing.Size(86, 32);
             this.buttonUpdate.TabIndex = 2;
             this.buttonUpdate.Text = "Обновить";
             this.buttonUpdate.UseVisualStyleBackColor = true;
@@ -72,7 +73,7 @@ namespace IceCreamShopView
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.dataGridView);
             this.Name = "FormClients";
-            this.Text = "FormClients";
+            this.Text = "Клиенты";
             this.Load += new System.EventHandler(this.FormClients_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);

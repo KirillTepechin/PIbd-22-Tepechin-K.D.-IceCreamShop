@@ -1,5 +1,4 @@
-﻿using IceCreamDatabaseImplement;
-using IceCreamShopContracts.BindingModels;
+﻿using IceCreamShopContracts.BindingModels;
 using IceCreamShopContracts.StorageContracts;
 using IceCreamShopContracts.ViewModels;
 using IceCreamShopDatabaseImplement.Models;
