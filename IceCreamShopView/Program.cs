@@ -67,7 +67,6 @@ namespace IceCreamShopView
             HierarchicalLifetimeManager());
             currentContainer.RegisterType<IClientStorage, ClientStorage>(new
             HierarchicalLifetimeManager());
-                HierarchicalLifetimeManager());
             currentContainer.RegisterType<IWarehouseStorage, WarehouseStorage>(new
            HierarchicalLifetimeManager());
             currentContainer.RegisterType<IWarehouseLogic, WarehouseLogic>(new

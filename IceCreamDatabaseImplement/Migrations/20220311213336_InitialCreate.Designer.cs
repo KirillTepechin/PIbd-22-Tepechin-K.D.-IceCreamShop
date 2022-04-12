@@ -9,11 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IceCreamShopDatabaseImplement.Migrations
 {
     [DbContext(typeof(IceCreamShopDatabase))]
-<<<<<<<< HEAD:IceCreamDatabaseImplement/Migrations/20220311213336_InitialCreate.Designer.cs
     [Migration("20220311213336_InitialCreate")]
-========
-    [Migration("20220331092343_InitialCreate")]
->>>>>>>> lab5_basic:IceCreamDatabaseImplement/Migrations/20220331092343_InitialCreate.Designer.cs
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -231,7 +227,6 @@ namespace IceCreamShopDatabaseImplement.Migrations
                     b.Navigation("IceCream");
                 });
 
-<<<<<<<< HEAD:IceCreamDatabaseImplement/Migrations/20220311213336_InitialCreate.Designer.cs
             modelBuilder.Entity("IceCreamShopDatabaseImplement.Models.WarehouseIngredient", b =>
                 {
                     b.HasOne("IceCreamShopDatabaseImplement.Models.Ingredient", "Ingredient")
@@ -249,11 +244,11 @@ namespace IceCreamShopDatabaseImplement.Migrations
                     b.Navigation("Ingredient");
 
                     b.Navigation("Warehouse");
-========
+                });
+
             modelBuilder.Entity("IceCreamShopDatabaseImplement.Models.Client", b =>
                 {
                     b.Navigation("Order");
->>>>>>>> lab5_basic:IceCreamDatabaseImplement/Migrations/20220331092343_InitialCreate.Designer.cs
                 });
 
             modelBuilder.Entity("IceCreamShopDatabaseImplement.Models.IceCream", b =>

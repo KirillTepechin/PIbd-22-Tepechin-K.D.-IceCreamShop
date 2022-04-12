@@ -221,6 +221,7 @@ namespace IceCreamShopFileImplement
 
                 XDocument xDocument = new XDocument(xElement);
                 xDocument.Save(WarehouseFileName);
+            }
         }
         private void SaveClients()
         {
@@ -239,7 +240,7 @@ namespace IceCreamShopFileImplement
                 xDocument.Save(ClientFileName);
             }
         }
-        }
+        
         private List<Warehouse> LoadWarehouses()
         {
             var list = new List<Warehouse>();
