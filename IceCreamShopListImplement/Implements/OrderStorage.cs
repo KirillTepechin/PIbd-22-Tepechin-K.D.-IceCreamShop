@@ -58,7 +58,9 @@ namespace IceCreamShopListImplement.Implements
             List<OrderViewModel> result = new List<OrderViewModel>();
             foreach (var order in source.Orders)
             {
-                if (order.IceCreamId == model.IceCreamId || order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo)
+                if ((!model.DateFrom.HasValue && !model.DateTo.HasValue && order.DateCreate == model.DateCreate) ||
+            (model.DateFrom.HasValue && model.DateTo.HasValue && order.DateCreate.Date >= model.DateFrom.Value.Date && order.DateCreate.Date <= model.DateTo.Value.Date) ||
+            (model.ClientId.HasValue && order.ClientId == model.ClientId))
                 {
                     result.Add(CreateModel(order));
                 }
@@ -119,11 +121,22 @@ namespace IceCreamShopListImplement.Implements
                     break;
                 }
             }
+            string clientFIO = null;
+            for (int i = 0; i < source.Clients.Count; i++)
+            {
+                if (source.Clients[i].Id == order.ClientId)
+                {
+                    clientFIO = source.Clients[i].ClientFIO;
+                    break;
+                }
+            }
             return new OrderViewModel
             {
                 Id = (int)order.Id,
                 IceCreamId = order.IceCreamId,
+                ClientId = order.ClientId,
                 IceCreamName = iceCreamName,
+                ClientFIO = clientFIO,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = Enum.GetName(order.Status),
@@ -134,6 +147,7 @@ namespace IceCreamShopListImplement.Implements
         private Order CreateModel(OrderBindingModel model, Order order)
         {
             order.IceCreamId = model.IceCreamId;
+            order.ClientId = (int)model.ClientId;
             order.Count = model.Count;
             order.Sum = model.Sum;
             order.Status = model.Status;
