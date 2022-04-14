@@ -44,9 +44,9 @@ namespace IceCreamShopView
                             stringIngredients += ingr.Key + ") " + ingr.Value.Item1 + ": " + ingr.Value.Item2 + ", ";
                         }
                         if (stringIngredients.Length != 0)
-                        dataGridView.Rows.Add(new object[] { wh.Id, wh.WarehouseName, wh.ResponsiblePerson, wh.DateCreate, stringIngredients[0..^2] });
+                            dataGridView.Rows.Add(new object[] { wh.Id, wh.WarehouseName, wh.ResponsiblePerson, wh.DateCreate, stringIngredients[0..^2] });
                         else
-                        dataGridView.Rows.Add(new object[] { wh.Id, wh.WarehouseName, wh.ResponsiblePerson, wh.DateCreate });
+                            dataGridView.Rows.Add(new object[] { wh.Id, wh.WarehouseName, wh.ResponsiblePerson, wh.DateCreate });
                     }
                 }
             }

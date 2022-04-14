@@ -33,9 +33,13 @@ namespace IceCreamShopRestApi
             services.AddTransient<IClientStorage, ClientStorage>();
             services.AddTransient<IOrderStorage, OrderStorage>();
             services.AddTransient<IIceCreamStorage, IceCreamStorage>();
+            services.AddTransient<IIngredientStorage, IngredientStorage>();
+            services.AddTransient<IWarehouseStorage, WarehouseStorage>();
             services.AddTransient<IOrderLogic, OrderLogic>();
             services.AddTransient<IClientLogic, ClientLogic>();
             services.AddTransient<IIceCreamLogic, IceCreamLogic>();
+            services.AddTransient<IWarehouseLogic, WarehouseLogic>();
+            services.AddTransient<IIngredientLogic, IngredientLogic>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
