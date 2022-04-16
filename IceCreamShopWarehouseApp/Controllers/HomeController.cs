@@ -1,4 +1,5 @@
-﻿using IceCreamShopContracts.ViewModels;
+﻿using IceCreamShopContracts.BindingModels;
+using IceCreamShopContracts.ViewModels;
 using IceCreamShopWarehouseApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -55,6 +56,49 @@ namespace IceCreamShopWarehouseApp.Controllers
                 return;
             }
             throw new Exception("Введите пароль");
+        }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            ViewBag.Warehouses =
+            APIClient.GetRequest<List<WarehouseViewModel>>("api/warehouse/getwarehouses");
+            return View();
+        }
+        [HttpPost]
+        public void Create(string warehouseName, string responsiblePerson)
+        {
+            if (String.IsNullOrEmpty(warehouseName) || String.IsNullOrEmpty(responsiblePerson))
+            {
+                return;
+            }
+            APIClient.PostRequest("api/warehouse/createupdatewarehouse", new WarehouseBindingModel
+            {
+               WarehouseName = warehouseName,
+               ResponsiblePerson = responsiblePerson,
+               DateCreate = DateTime.Now,
+               WarhouseIngredients = new Dictionary<int, (string, int)>()
+            });
+            Response.Redirect("Index");
+        }
+        public IActionResult Update()
+        {
+            ViewBag.Warehouses =
+            APIClient.GetRequest<List<WarehouseViewModel>>("api/warehouse/getwarehouses");
+            return View();
+        }
+        [HttpPost]
+        public void Update(int id, string warehouseName, string responsiblePerson)
+        {
+            if (id == 0)
+            {
+                return;
+            }
+            APIClient.PostRequest("api/warehouse/createupdatewarehouse", new WarehouseBindingModel
+            {
+                Id = id,
+                //TODO: Отсюда начать
+            });
+            Response.Redirect("Index");
         }
     }
 }
