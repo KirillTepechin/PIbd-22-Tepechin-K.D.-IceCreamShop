@@ -1,4 +1,5 @@
 ﻿using IceCreamShopContracts.BindingModels;
+using IceCreamShopContracts.StorageContracts;
 using IceCreamShopContracts.ViewModels;
 using IceCreamShopFileImplement.Models;
 using System;
