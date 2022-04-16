@@ -52,7 +52,7 @@ namespace IceCreamDatabaseImplement.Implements
             using var context = new IceCreamShopDatabase();
             return context.Orders
             .Include(rec => rec.IceCream)
-            .Where(rec => rec.Id.Equals(model.Id))
+            .Where(rec => rec.Id.Equals(model.Id) ||  rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
             .ToList()
             .Select(CreateModel)
             .ToList();
