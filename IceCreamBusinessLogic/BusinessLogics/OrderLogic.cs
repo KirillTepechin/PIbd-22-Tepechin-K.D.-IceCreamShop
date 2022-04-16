@@ -47,11 +47,12 @@ namespace IceCreamShopBusinessLogic.BusinessLogics
                 Id = order.Id,
                 IceCreamId = order.IceCreamId,
                 ClientId = order.ClientId,
+                ImplementerId = order.ImplementerId,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
-                Status = OrderStatus.Выдан
+                Status = OrderStatus.Выдан,
             });
         }
 
@@ -74,6 +75,7 @@ namespace IceCreamShopBusinessLogic.BusinessLogics
             {
                 Id = order.Id,
                 IceCreamId = order.IceCreamId,
+                ImplementerId = order.ImplementerId,
                 ClientId = order.ClientId,
                 Count = order.Count,
                 Sum = order.Sum,
@@ -100,7 +102,7 @@ namespace IceCreamShopBusinessLogic.BusinessLogics
         {
             var order = _orderStorage.GetElement(new OrderBindingModel
             {
-                Id = model.OrderId
+                Id = model.OrderId,
             });
             if (order == null)
             {
@@ -114,6 +116,7 @@ namespace IceCreamShopBusinessLogic.BusinessLogics
             {
                 Id = order.Id,
                 IceCreamId = order.IceCreamId,
+                ImplementerId = model.ImplementerId,
                 ClientId = order.ClientId,
                 Count = order.Count,
                 Sum = order.Sum,
