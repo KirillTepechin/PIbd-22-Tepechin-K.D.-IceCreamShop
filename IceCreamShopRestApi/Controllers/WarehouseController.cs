@@ -25,7 +25,7 @@ namespace IceCreamShopRestApi.Controllers
         [HttpGet]
         public WarehouseViewModel GetWarehouse(int warehouseId) => _warehouseLogic.Read(new WarehouseBindingModel { Id = warehouseId })?[0];
         [HttpGet]
-        public List<IngredientViewModel> GetWarehouseIngredients() => _ingredientLogic.Read(null)?.ToList();
+        public List<IngredientViewModel> GetIngredients() => _ingredientLogic.Read(null)?.ToList();
         [HttpPost]
         public void CreateUpdateWarehouse(WarehouseBindingModel model) => _warehouseLogic.CreateOrUpdate(model);
         [HttpPost]

@@ -2,29 +2,44 @@
     ViewData["Title"] = "Change";
 }
 <div class="text-center">
-    <h2 class="display-4">Изменить склад склада</h2>
+    <h2 class="display-4">Изменить склад</h2>
 </div>
 <form method="post">
     <div class="row">
-        <div class="col-4">Склад:</div>
-        <div class="col-8">
-            <select id="iceCream" name="warehouse" class="form-control" asp-items="@(new SelectList(@ViewBag.Warehouses," Id", "WarehouseName" ))"></select>
-        </div>
-    </div>
-    <div class="row">
         <div class="col-4">Название склада:</div>
-        <div class="col-8"><input type="text" name="warehouseName" id="warehouseName" /></div>
+        <div class="col-8"><input type="text" name="warehouseName" id="warehouseName" value="@ViewBag.Warehouse.WarehouseName" /></div>
     </div>
     <div class="row">
-        <div class="col-4">Ответственное лицо:</div>
-        <div class="col-8">
-            <input type="text" name="responsiblePerson" id="responsiblePerson" />
-        </div>
+        <div class="col-4">ФИО ответственного:</div>
+        <div class="col-8"><input type="text" name="responsiblePerson" id="responsiblePerson" value="@ViewBag.Warehouse.ResponsiblePerson" /></div>
     </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Ингредиент
+                </th>
+                <th>
+                    Количество
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in @ViewBag.Warehouse.WarehouseIngredients)
+            {
+                <tr>
+                    <td>
+                        @item.Value.Item1
+                    </td>
+                    <td>
+                        @item.Value.Item2
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
     <div class="row">
         <div class="col-8"></div>
-        <div class="col-4">
-            <input type="submit" value="Изменить" class="btn btn-primary" />
-        </div>
+        <div class="col-4"><input type="submit" value="Изменить" class="btn btn-primary" /></div>
     </div>
 </form>

@@ -1,5 +1,5 @@
 ﻿@using IceCreamShopContracts.ViewModels
-@model List<WarehouseViewModel>
+@model List<WarehouseViewModel> 
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -13,21 +13,14 @@
             <h3 class="display-4">Авторизируйтесь</h3>
             return;
         }
-        <p>
-            <a asp-action="Create">Создать склад</a>
-        </p>
-        <p>
-            <a asp-action="Change">Изменить склад</a>
-        </p>
-        <p>
-            <a asp-action="Delete">Удалить склад</a>
-        </p>
+        <div class="row justify-content-center">
+            <p>
+                <a class="col-lg-auto" asp-action="Create">Создать склад</a>
+            </p>
+        </div>
         <table class="table">
             <thead>
                 <tr>
-                    <th>
-                        Номер
-                    </th>
                     <th>
                         Склад
                     </th>
@@ -37,32 +30,41 @@
                     <th>
                         Дата создания
                     </th>
-                    <th></th>
+                    <th>
+                        Ингредиенты
+                    </th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Id)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.WarehouseName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ResponsiblePerson)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DateCreate)
-                        </td>
-                        <td>
-                            @{
-                                var stringIngredients = item.GetStringIngredients();
-                            }
-                            @Html.DisplayFor(modelItem => stringIngredients)
-                        </td>
-                    </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.WarehouseName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ResponsiblePerson)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateCreate)
+                    </td>
+                    <td>
+                        @{
+                            var stringIngredients = item.GetStringIngredients();
+                        }
+                        @Html.DisplayFor(modelItem => stringIngredients)
+                    </td>
+                    <td>
+                        <a asp-action="Change" asp-route-warehouseId="@item.Id"
+                           asp-route-warehouseName="@item.WarehouseName" responsiblePerson="@item.ResponsiblePerson">Изменить</a>
+                    </td>
+                    <td>
+                        <a asp-action="Delete" asp-route-warehouseId="@item.Id" >Удалить</a>
+                    </td>
+                    <td>
+                        <a asp-action="Replenish" asp-route-warehouseId="@item.Id" >Пополнить</a>
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>

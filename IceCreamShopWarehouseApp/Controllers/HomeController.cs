@@ -60,14 +60,12 @@ namespace IceCreamShopWarehouseApp.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Warehouses =
-            APIClient.GetRequest<List<WarehouseViewModel>>("api/warehouse/getwarehouses");
             return View();
         }
         [HttpPost]
         public void Create(string warehouseName, string responsiblePerson)
         {
-            if (String.IsNullOrEmpty(warehouseName) || String.IsNullOrEmpty(responsiblePerson))
+            if (string.IsNullOrEmpty(warehouseName) || string.IsNullOrEmpty(responsiblePerson))
             {
                 return;
             }
@@ -80,23 +78,74 @@ namespace IceCreamShopWarehouseApp.Controllers
             });
             Response.Redirect("Index");
         }
-        public IActionResult Update()
+        [HttpGet]
+        public IActionResult Change(int warehouseId)
         {
-            ViewBag.Warehouses =
-            APIClient.GetRequest<List<WarehouseViewModel>>("api/warehouse/getwarehouses");
+            ViewBag.Warehouse =
+            APIClient.GetRequest<WarehouseViewModel>($"api/warehouse/getwarehouse?warehouseId={warehouseId}");
             return View();
         }
         [HttpPost]
-        public void Update(int id, string warehouseName, string responsiblePerson)
+        public void Change(int warehouseId, string warehouseName, string responsiblePerson)
         {
-            if (id == 0)
+            if (warehouseId == 0)
             {
                 return;
             }
+            WarehouseViewModel warehouse = APIClient.GetRequest<WarehouseViewModel>($"api/Warehouse/getwarehouse?warehouseId={warehouseId}");
             APIClient.PostRequest("api/warehouse/createupdatewarehouse", new WarehouseBindingModel
             {
-                Id = id,
-                //TODO: Отсюда начать
+                Id = warehouseId,
+                WarehouseName = warehouseName,
+                ResponsiblePerson = responsiblePerson,
+                WarhouseIngredients = warehouse.WarehouseIngredients,
+                DateCreate = warehouse.DateCreate
+            });
+            Response.Redirect("Index");
+        }
+        [HttpGet]
+        public IActionResult Delete(int warehouseId)
+        {
+            ViewBag.Warehouse =
+            APIClient.GetRequest<WarehouseViewModel>($"api/warehouse/getwarehouse?warehouseId={warehouseId}");
+
+            return View();
+        }
+        [HttpPost]
+        [ActionName("Delete")]
+        public void DeleteConfirmed(int warehouseId)
+        {
+            if (warehouseId == 0)
+            {
+                return;
+            }
+            APIClient.PostRequest("api/warehouse/deletewarehouse", new WarehouseBindingModel
+            {
+                Id = warehouseId
+            });
+            Response.Redirect("Index");
+        }
+        [HttpGet]
+        public IActionResult Replenish(int warehouseId)
+        {
+            ViewBag.Warehouse =
+            APIClient.GetRequest<WarehouseViewModel>($"api/warehouse/getwarehouse?warehouseId={warehouseId}");
+            ViewBag.Ingredients =
+            APIClient.GetRequest<List<IngredientViewModel>>($"api/warehouse/getingredients");
+            return View();
+        }
+        [HttpPost]
+        public void Replenish(int warehouseId, int ingredientId, int count)
+        {
+            if (warehouseId == 0 || ingredientId == 0 || count < 0)
+            {
+                return;
+            }
+            APIClient.PostRequest("api/warehouse/replenishwarehouse", new ReplenishBindingModel
+            {
+                WarehouseId = warehouseId,
+                IngredientId = ingredientId,
+                Count = count,
             });
             Response.Redirect("Index");
         }

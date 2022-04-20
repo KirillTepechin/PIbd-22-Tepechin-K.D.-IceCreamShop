@@ -40,7 +40,7 @@ namespace IceCreamShopRestApi
             services.AddTransient<IIceCreamLogic, IceCreamLogic>();
             services.AddTransient<IWarehouseLogic, WarehouseLogic>();
             services.AddTransient<IIngredientLogic, IngredientLogic>();
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "IceCreamShopRestApi", Version = "v1" });

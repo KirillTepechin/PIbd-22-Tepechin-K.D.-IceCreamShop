@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="text-center">
+    <h2 class="display-4">Удалить склад "@ViewBag.Warehouse.WarehouseName" ?</h2>
+</div>
+<form method="post">
+    <div class="row justify-content-center">
+        <div class="col-4"><input type="submit" value="Удалить" class="btn btn-danger" /></div>
+        <a class="btn btn-primary" asp-area="" asp-controller="Home" asp-action="Index">Отмена</a>
+    </div>
+</form>
