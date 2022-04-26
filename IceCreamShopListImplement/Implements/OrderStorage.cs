@@ -59,8 +59,9 @@ namespace IceCreamShopListImplement.Implements
             foreach (var order in source.Orders)
             {
                 if ((!model.DateFrom.HasValue && !model.DateTo.HasValue && order.DateCreate == model.DateCreate) ||
-            (model.DateFrom.HasValue && model.DateTo.HasValue && order.DateCreate.Date >= model.DateFrom.Value.Date && order.DateCreate.Date <= model.DateTo.Value.Date) ||
-            (model.ClientId.HasValue && order.ClientId == model.ClientId))
+                    (model.DateFrom.HasValue && model.DateTo.HasValue && order.DateCreate.Date >= model.DateFrom.Value.Date && order.DateCreate.Date <= model.DateTo.Value.Date) ||
+                    (model.ClientId.HasValue && order.ClientId == model.ClientId) || (model.SearchStatus.HasValue && model.SearchStatus.Value == order.Status) ||
+                    (model.ImplementerId.HasValue && order.ImplementerId == model.ImplementerId && model.Status == order.Status))
                 {
                     result.Add(CreateModel(order));
                 }
@@ -130,13 +131,24 @@ namespace IceCreamShopListImplement.Implements
                     break;
                 }
             }
+            string implementerFIO = null;
+            for (int i = 0; i < source.Implementers.Count; i++)
+            {
+                if (source.Implementers[i].Id == order.ImplementerId)
+                {
+                    implementerFIO = source.Implementers[i].ImplementerFIO;
+                    break;
+                }
+            }
             return new OrderViewModel
             {
                 Id = (int)order.Id,
                 IceCreamId = order.IceCreamId,
                 ClientId = order.ClientId,
+                ImplementerId = order.ImplementerId,
                 IceCreamName = iceCreamName,
                 ClientFIO = clientFIO,
+                ImplementerFIO = implementerFIO,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = Enum.GetName(order.Status),
@@ -148,6 +160,7 @@ namespace IceCreamShopListImplement.Implements
         {
             order.IceCreamId = model.IceCreamId;
             order.ClientId = (int)model.ClientId;
+            order.ImplementerId = model.ImplementerId;
             order.Count = model.Count;
             order.Sum = model.Sum;
             order.Status = model.Status;

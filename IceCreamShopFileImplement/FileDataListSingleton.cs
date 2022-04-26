@@ -15,11 +15,13 @@ namespace IceCreamShopFileImplement
         private readonly string OrderFileName = "Order.xml";
         private readonly string IceCreamFileName = "IceCream.xml";
         private readonly string ClientFileName = "Client.xml";
+        private readonly string ImplementerFileName = "Implementer.xml";
         private readonly string WarehouseFileName = "Warehouse.xml";
         public List<Ingredient> Ingredients { get; set; }
         public List<Order> Orders { get; set; }
         public List<IceCream> IceCreams { get; set; }
         public List<Client> Clients { get; set; }
+        public List<Implementer> Implementers { get; set; }
         public List<Warehouse> Warehouses { get; set; }
         private FileDataListSingleton()
         {
@@ -43,6 +45,7 @@ namespace IceCreamShopFileImplement
             SaveOrders();
             SaveIceCreams();
             SaveClients();
+            SaveImplementers();
             SaveWarehouses();
         }
         private List<Ingredient> LoadIngredients()
@@ -83,6 +86,26 @@ namespace IceCreamShopFileImplement
                         DateCreate = Convert.ToDateTime(elem.Element("DateCreate").Value),
                         DateImplement = string.IsNullOrEmpty(elem.Element("DateImplement").Value) ? (DateTime?)null :
                             Convert.ToDateTime(elem.Element("DateImplement").Value)
+                    });
+                }
+            }
+            return list;
+        }
+        private List<Implementer> LoadImplementers()
+        {
+            var list = new List<Implementer>();
+            if (File.Exists(ImplementerFileName))
+            {
+                var xDocument = XDocument.Load(ImplementerFileName);
+                var xElements = xDocument.Root.Elements("Imlementer").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new Implementer
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        ImplementerFIO = elem.Attribute("ImplementerFIO").Value,
+                        PauseTime = Convert.ToInt32(elem.Attribute("PauseTime").Value),
+                        WorkingTime = Convert.ToInt32(elem.Attribute("WorkingTime").Value)
                     });
                 }
             }
@@ -169,6 +192,20 @@ namespace IceCreamShopFileImplement
                 XDocument xDocument = new XDocument(xElement);
                 xDocument.Save(OrderFileName);
             }
+        }
+        private void SaveImplementers()
+        {
+            var xElement = new XElement("Implementers");
+            foreach (var implementer in Implementers)
+            {
+                xElement.Add(new XElement("Implementer",
+                    new XAttribute("Id", implementer.Id),
+                    new XAttribute("ImplementerFIO", implementer.ImplementerFIO),
+                    new XAttribute("WorkingTime", implementer.WorkingTime),
+                    new XAttribute("PauseTime", implementer.PauseTime)));
+            }
+            var xDocument = new XDocument(xElement);
+            xDocument.Save(ImplementerFileName);
         }
         private void SaveIceCreams()
         {
@@ -276,6 +313,7 @@ namespace IceCreamShopFileImplement
             GetInstance().SaveOrders();
             GetInstance().SaveIceCreams();
             GetInstance().SaveClients();
+            GetInstance().SaveImplementers();
             GetInstance().SaveWarehouses();
         }
     }

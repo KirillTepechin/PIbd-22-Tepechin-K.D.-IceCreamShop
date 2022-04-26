@@ -17,11 +17,16 @@ namespace IceCreamShopView
     {
         private readonly IReportLogic _reportLogic;
         private readonly IOrderLogic _orderLogic;
-        public FormMain(IOrderLogic orderLogic, IReportLogic reportLogic)
+        private readonly IImplementerLogic _implementerLogic;
+        private readonly IWorkProcess _workProcces;
+        public FormMain(IOrderLogic orderLogic, IReportLogic reportLogic, 
+            IWorkProcess workProcess, IImplementerLogic implementerLogic)
         {
             InitializeComponent();
             _orderLogic = orderLogic;
             _reportLogic = reportLogic;
+            _implementerLogic = implementerLogic;
+            _workProcces = workProcess;
         }
         private void toolStripMenuItemWarehouses_Click(object sender, EventArgs e)
         {
@@ -60,6 +65,7 @@ namespace IceCreamShopView
                     dataGridView.Columns[0].Visible = false;
                     dataGridView.Columns[1].Visible = false;
                     dataGridView.Columns[2].Visible = false;
+                    dataGridView.Columns[3].Visible = false;
                 }
             }
             catch (Exception ex)
@@ -79,50 +85,6 @@ namespace IceCreamShopView
             var form = Program.Container.Resolve<FormCreateOrder>();
             form.ShowDialog();
             LoadData();
-        }
-
-        private void buttonTakeOrderInWork_Click(object sender, EventArgs e)
-        {
-            if (dataGridView.SelectedRows.Count == 1)
-            {
-                int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
-                try
-                {
-                    _orderLogic.TakeOrderInWork(new ChangeStatusBindingModel
-                    {
-                        OrderId =
-                   id
-                    });
-                    LoadData();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-                   MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void buttonOrderReady_Click(object sender, EventArgs e)
-        {
-            if (dataGridView.SelectedRows.Count == 1)
-            {
-                int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
-                try
-                {
-                    _orderLogic.FinishOrder(new ChangeStatusBindingModel
-                    {
-                        OrderId = id
-                    });
-                    LoadData();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-                   MessageBoxIcon.Error);
-                }
-            }
-
         }
 
         private void buttonIssuedOrder_Click(object sender, EventArgs e)
@@ -174,6 +136,18 @@ namespace IceCreamShopView
         private void toolStripMenuItemClients_Click(object sender, EventArgs e)
         {
             var form = Program.Container.Resolve<FormClients>();
+            form.ShowDialog();
+        }
+
+        private void toolStripMenuItemStartWorks_Click(object sender, EventArgs e)
+        {
+            _workProcces.DoWork(_implementerLogic,_orderLogic);
+            LoadData();
+        }
+
+        private void toolStripMenuItemImplementers_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormImplementers>();
             form.ShowDialog();
         }
         private void toolStripMenuItemWarehouseList_Click(object sender, EventArgs e)
