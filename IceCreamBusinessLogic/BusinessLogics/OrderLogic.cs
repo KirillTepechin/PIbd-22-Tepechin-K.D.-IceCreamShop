@@ -49,11 +49,12 @@ namespace IceCreamShopBusinessLogic.BusinessLogics
                 Id = order.Id,
                 IceCreamId = order.IceCreamId,
                 ClientId = order.ClientId,
+                ImplementerId = order.ImplementerId,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
-                Status = OrderStatus.Выдан
+                Status = OrderStatus.Выдан,
             });
         }
 
@@ -76,6 +77,7 @@ namespace IceCreamShopBusinessLogic.BusinessLogics
             {
                 Id = order.Id,
                 IceCreamId = order.IceCreamId,
+                ImplementerId = order.ImplementerId,
                 ClientId = order.ClientId,
                 Count = order.Count,
                 Sum = order.Sum,
@@ -102,13 +104,13 @@ namespace IceCreamShopBusinessLogic.BusinessLogics
         {
             var order = _orderStorage.GetElement(new OrderBindingModel
             {
-                Id = model.OrderId
+                Id = model.OrderId,
             });
             if (order == null)
             {
                 throw new Exception("Заказ не найден");
             }
-            if (!order.Status.Equals(Enum.GetName(typeof(OrderStatus),0)))
+            if (!order.Status.Equals(Enum.GetName(typeof(OrderStatus), 0)) && !order.Status.Equals(Enum.GetName(typeof(OrderStatus), 4)))
             {
                 throw new Exception("Заказ не принят");
             }
@@ -116,20 +118,23 @@ namespace IceCreamShopBusinessLogic.BusinessLogics
             {
                 IceCreamId = order.IceCreamId,
                 Count = order.Count
-            }))
-            {
-                throw new Exception("Компонентов не достаточно");
             }
+            ))
+            {
+                order.Status = Enum.GetName(OrderStatus.Требуются_материалы);
+            }
+            else order.Status = Enum.GetName(OrderStatus.Выполняется);
             _orderStorage.Update(new OrderBindingModel
             {
                 Id = order.Id,
                 IceCreamId = order.IceCreamId,
+                ImplementerId = model.ImplementerId,
                 ClientId = order.ClientId,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
                 DateImplement = DateTime.Now,
-                Status = OrderStatus.Выполняется
+                Status = Enum.Parse<OrderStatus>(order.Status)
             });
         }
     }
