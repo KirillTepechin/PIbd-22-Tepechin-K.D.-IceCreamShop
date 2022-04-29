@@ -192,7 +192,6 @@ namespace IceCreamShopDatabaseImplement.Migrations
                 column: "IceCreamId");
 
             migrationBuilder.CreateIndex(
-<<<<<<<< HEAD:IceCreamDatabaseImplement/Migrations/20220311213336_InitialCreate.cs
                 name: "IX_WarehouseIngredients_IngredientId",
                 table: "WarehouseIngredients",
                 column: "IngredientId");
@@ -201,11 +200,11 @@ namespace IceCreamShopDatabaseImplement.Migrations
                 name: "IX_WarehouseIngredients_WarehouseId",
                 table: "WarehouseIngredients",
                 column: "WarehouseId");
-========
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Orders_ImplementerId",
                 table: "Orders",
                 column: "ImplementerId");
->>>>>>>> lab6_basic:IceCreamDatabaseImplement/Migrations/20220416135827_InitialCreate.cs
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -226,14 +225,13 @@ namespace IceCreamShopDatabaseImplement.Migrations
                 name: "IceCreams");
 
             migrationBuilder.DropTable(
-<<<<<<<< HEAD:IceCreamDatabaseImplement/Migrations/20220311213336_InitialCreate.cs
                 name: "Ingredients");
 
             migrationBuilder.DropTable(
                 name: "Warehouses");
-========
+
+            migrationBuilder.DropTable(
                 name: "Implementers");
->>>>>>>> lab6_basic:IceCreamDatabaseImplement/Migrations/20220416135827_InitialCreate.cs
         }
     }
 }

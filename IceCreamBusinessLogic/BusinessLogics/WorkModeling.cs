@@ -45,8 +45,7 @@ namespace IceCreamShopBusinessLogic.BusinessLogics
         ConcurrentBag<OrderViewModel> orders)
         {
             // ищем заказы, которые уже в работе (вдруг исполнителя прервали)
-            var runOrders = await Task.Run(() => _orderLogic.Read(new
-            OrderBindingModel
+            var runOrders = await Task.Run(() => _orderLogic.Read(new OrderBindingModel
             {
                 ImplementerId = implementer.Id,
                 Status = OrderStatus.Выполняется
@@ -58,8 +57,31 @@ namespace IceCreamShopBusinessLogic.BusinessLogics
                 order.Count);
                 _orderLogic.FinishOrder(new ChangeStatusBindingModel
                 {
-                    OrderId
-                = order.Id
+                    OrderId = order.Id
+                });
+                // отдыхаем
+                Thread.Sleep(implementer.PauseTime);
+            }
+            var requireIngredients = await Task.Run(() => _orderLogic.Read(new OrderBindingModel
+            {
+                ImplementerId = implementer.Id,
+                Status = OrderStatus.Требуются_материалы
+            }));
+            foreach (var order in requireIngredients)
+            {
+                // пытаемся назначить заказ на исполнителя
+                _orderLogic.TakeOrderInWork(new
+                ChangeStatusBindingModel
+                { OrderId = order.Id, ImplementerId = implementer.Id });
+                if (order.Status.Equals(Enum.GetName(typeof(OrderStatus), 4)))
+                {
+                    continue;
+                }
+                // делаем работу
+                Thread.Sleep(implementer.WorkingTime * rnd.Next(1, 5) * order.Count);
+                _orderLogic.FinishOrder(new ChangeStatusBindingModel
+                { 
+                    OrderId = order.Id, ImplementerId = implementer.Id 
                 });
                 // отдыхаем
                 Thread.Sleep(implementer.PauseTime);
@@ -74,12 +96,15 @@ namespace IceCreamShopBusinessLogic.BusinessLogics
                         _orderLogic.TakeOrderInWork(new
                         ChangeStatusBindingModel
                         { OrderId = order.Id, ImplementerId = implementer.Id });
+                        if (order.Status.Equals(Enum.GetName(typeof(OrderStatus), 4)))
+                        {
+                            continue;
+                        }
                         // делаем работу
                         Thread.Sleep(implementer.WorkingTime *
                         rnd.Next(1, 5) * order.Count);
-                        _orderLogic.FinishOrder(new
-                        ChangeStatusBindingModel
-                        { OrderId = order.Id });
+                        _orderLogic.FinishOrder(new ChangeStatusBindingModel
+                        { OrderId = order.Id, ImplementerId = implementer.Id});
                         // отдыхаем
                         Thread.Sleep(implementer.PauseTime);
                     }

@@ -110,7 +110,7 @@ namespace IceCreamShopBusinessLogic.BusinessLogics
             {
                 throw new Exception("Заказ не найден");
             }
-            if (!order.Status.Equals(Enum.GetName(typeof(OrderStatus),0)))
+            if (!order.Status.Equals(Enum.GetName(typeof(OrderStatus), 0)) && !order.Status.Equals(Enum.GetName(typeof(OrderStatus), 4)))
             {
                 throw new Exception("Заказ не принят");
             }
@@ -118,10 +118,12 @@ namespace IceCreamShopBusinessLogic.BusinessLogics
             {
                 IceCreamId = order.IceCreamId,
                 Count = order.Count
-            }))
-            {
-                throw new Exception("Компонентов не достаточно");
             }
+            ))
+            {
+                order.Status = Enum.GetName(OrderStatus.Требуются_материалы);
+            }
+            else order.Status = Enum.GetName(OrderStatus.Выполняется);
             _orderStorage.Update(new OrderBindingModel
             {
                 Id = order.Id,
@@ -132,7 +134,7 @@ namespace IceCreamShopBusinessLogic.BusinessLogics
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
                 DateImplement = DateTime.Now,
-                Status = OrderStatus.Выполняется
+                Status = Enum.Parse<OrderStatus>(order.Status)
             });
         }
     }

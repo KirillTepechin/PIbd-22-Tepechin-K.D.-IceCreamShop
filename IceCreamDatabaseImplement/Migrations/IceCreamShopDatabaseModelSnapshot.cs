@@ -259,11 +259,6 @@ namespace IceCreamShopDatabaseImplement.Migrations
                     b.Navigation("Implementer");
                 });
 
-            modelBuilder.Entity("IceCreamShopDatabaseImplement.Models.Client", b =>
-                {
-                    b.Navigation("Order");
-                });
-
             modelBuilder.Entity("IceCreamShopDatabaseImplement.Models.WarehouseIngredient", b =>
                 {
                     b.HasOne("IceCreamShopDatabaseImplement.Models.Ingredient", "Ingredient")
@@ -281,6 +276,11 @@ namespace IceCreamShopDatabaseImplement.Migrations
                     b.Navigation("Ingredient");
 
                     b.Navigation("Warehouse");
+                });
+
+            modelBuilder.Entity("IceCreamShopDatabaseImplement.Models.Client", b =>
+                {
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("IceCreamShopDatabaseImplement.Models.IceCream", b =>
