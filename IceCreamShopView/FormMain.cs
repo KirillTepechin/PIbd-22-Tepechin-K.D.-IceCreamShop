@@ -142,5 +142,11 @@ namespace IceCreamShopView
             var form = Program.Container.Resolve<FormImplementers>();
             form.ShowDialog();
         }
+
+        private void toolStripMenuItemMessages_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormMessages>();
+            form.ShowDialog();
+        }
     }
 }

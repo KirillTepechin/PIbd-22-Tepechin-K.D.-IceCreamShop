@@ -140,5 +140,15 @@ namespace IceCreamShopClientApp.Controllers
             APIClient.GetRequest<IceCreamViewModel>($"api/main/geticecream?iceCreamId={iceCream}");
             return count * ic.Price;
         }
+        [HttpGet]
+        public IActionResult Messages()
+        {
+            if (Program.Client == null)
+            {
+                return Redirect("~/Home/Enter");
+            }
+            return View(APIClient.GetRequest<List<MessageInfoViewModel>>
+                ($"api/main/getmessages?clientId={Program.Client.Id}"));
+        }
     }
 }

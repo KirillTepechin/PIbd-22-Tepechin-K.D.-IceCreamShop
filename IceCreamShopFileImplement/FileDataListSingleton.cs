@@ -16,17 +16,20 @@ namespace IceCreamShopFileImplement
         private readonly string IceCreamFileName = "IceCream.xml";
         private readonly string ClientFileName = "Client.xml";
         private readonly string ImplementerFileName = "Implementer.xml";
+        private readonly string MessageFileName = "Message.xml";
         public List<Ingredient> Ingredients { get; set; }
         public List<Order> Orders { get; set; }
         public List<IceCream> IceCreams { get; set; }
         public List<Client> Clients { get; set; }
         public List<Implementer> Implementers { get; set; }
+        public List<MessageInfo> Messages { get; set; }
         private FileDataListSingleton()
         {
             Ingredients = LoadIngredients();
             Orders = LoadOrders();
             IceCreams = LoadIceCreams();
             Clients = LoadClients();
+            Messages = LoadMessages();
         }
         public static FileDataListSingleton GetInstance()
         {
@@ -43,6 +46,7 @@ namespace IceCreamShopFileImplement
             SaveIceCreams();
             SaveClients();
             SaveImplementers();
+            SaveMessages();
         }
         private List<Ingredient> LoadIngredients()
         {
@@ -134,6 +138,34 @@ namespace IceCreamShopFileImplement
             }
             return list;
         }
+        private List<MessageInfo> LoadMessages()
+        {
+            var list = new List<MessageInfo>();
+            if (File.Exists(MessageFileName))
+            {
+                var xDocument = XDocument.Load(MessageFileName);
+                var xElements = xDocument.Root.Elements("Message").ToList();
+                int? clientId;
+                foreach (var elem in xElements)
+                {
+                    clientId = null;
+                    if (elem.Element("ClientId").Value != "")
+                    {
+                        clientId = Convert.ToInt32(elem.Element("ClientId").Value);
+                    }
+                    list.Add(new MessageInfo
+                    {
+                        MessageId = elem.Attribute("MessageId").Value,
+                        ClientId = clientId,
+                        Body = elem.Element("Body").Value,
+                        SenderName = elem.Element("SenderName").Value,
+                        Subject = elem.Element("Subject").Value,
+                        DateDelivery = DateTime.Parse(elem.Element("DateDelivery").Value)
+                    });
+                }
+            }
+            return list;
+        }
         private List<Client> LoadClients()
         {
             var list = new List<Client>();
@@ -186,6 +218,25 @@ namespace IceCreamShopFileImplement
                     new XElement("DateImplement", order.DateImplement)));
                 }
                 XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(OrderFileName);
+            }
+        }
+        private void SaveMessages()
+        {
+            if (Messages != null)
+            {
+                var xElement = new XElement("Messages");
+                foreach (var message in Messages)
+                {
+                    xElement.Add(new XElement("Message",
+                        new XAttribute("MessageId", message.MessageId),
+                        new XElement("ClientId", message.ClientId),
+                        new XElement("SenderName", message.SenderName),
+                        new XElement("Subject", message.Subject),
+                        new XElement("Body", message.Body),
+                        new XElement("DateDelivery", message.DateDelivery)));
+                }
+                var xDocument = new XDocument(xElement);
                 xDocument.Save(OrderFileName);
             }
         }
@@ -251,6 +302,7 @@ namespace IceCreamShopFileImplement
             GetInstance().SaveIceCreams();
             GetInstance().SaveClients();
             GetInstance().SaveImplementers();
+            GetInstance().SaveMessages();
         }
     }
 }
