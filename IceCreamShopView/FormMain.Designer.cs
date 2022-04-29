@@ -47,6 +47,7 @@ namespace IceCreamShopView
             this.buttonOrderReady = new System.Windows.Forms.Button();
             this.buttonIssuedOrder = new System.Windows.Forms.Button();
             this.buttonUpdate = new System.Windows.Forms.Button();
+            this.toolStripMenuItemClients = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemOrdersInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -210,6 +211,13 @@ namespace IceCreamShopView
             this.buttonUpdate.UseVisualStyleBackColor = true;
             this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
             // 
+            // toolStripMenuItemClients
+            // 
+            this.toolStripMenuItemClients.Name = "toolStripMenuItemClients";
+            this.toolStripMenuItemClients.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItemClients.Text = "Клиенты";
+            this.toolStripMenuItemClients.Click += new System.EventHandler(this.toolStripMenuItemClients_Click);
+            // 
             // toolStripMenuItemOrdersInfo
             // 
             this.toolStripMenuItemOrdersInfo.Name = "toolStripMenuItemOrdersInfo";
@@ -257,6 +265,7 @@ namespace IceCreamShopView
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemIceCreamsList;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemIceCreamIngredients;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemOrdersList;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemClients;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemWarehouses;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemReplenish;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemWarehouseList;

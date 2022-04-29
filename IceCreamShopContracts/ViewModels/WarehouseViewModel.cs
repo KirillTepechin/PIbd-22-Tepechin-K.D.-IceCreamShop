@@ -18,5 +18,17 @@ namespace IceCreamShopContracts.ViewModels
         public DateTime DateCreate { get; set; }
         [DisplayName("Ингредиенты")]
         public Dictionary<int, (string, int)> WarehouseIngredients { get; set; }
+        public string GetStringIngredients()
+        {
+            string stringIngredients = string.Empty;
+            foreach (var ingr in WarehouseIngredients)
+            {
+                stringIngredients += ingr.Key + ") " + ingr.Value.Item1 + ": " + ingr.Value.Item2 + ", ";
+            }
+            if (stringIngredients.Length != 0)
+                return stringIngredients[0..^2];
+            else
+               return stringIngredients;
+        }
     }
 }

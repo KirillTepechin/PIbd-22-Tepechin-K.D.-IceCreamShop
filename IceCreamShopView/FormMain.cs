@@ -59,6 +59,7 @@ namespace IceCreamShopView
                     dataGridView.DataSource = list;
                     dataGridView.Columns[0].Visible = false;
                     dataGridView.Columns[1].Visible = false;
+                    dataGridView.Columns[2].Visible = false;
                 }
             }
             catch (Exception ex)
@@ -170,6 +171,11 @@ namespace IceCreamShopView
             form.ShowDialog();
         }
 
+        private void toolStripMenuItemClients_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormClients>();
+            form.ShowDialog();
+        }
         private void toolStripMenuItemWarehouseList_Click(object sender, EventArgs e)
         {
             using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
