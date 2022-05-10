@@ -84,20 +84,8 @@ namespace IceCreamShopView
         {
             try
             {
-                var list = _logic.Read(null);
-                if (list != null)
-                {
-                    dataGridView.Rows.Clear();
-                    foreach (var ic in list)
-                    {
-                        string stringIngredients = string.Empty;
-                        foreach (var ingr in ic.IceCreamIngredients)
-                        {
-                            stringIngredients += ingr.Key + ") " + ingr.Value.Item1 + ": " + ingr.Value.Item2 + ", ";
-                        }
-                        dataGridView.Rows.Add(new object[] { ic.Id, ic.IceCreamName, ic.Price, stringIngredients[0..^2] });
-                    }
-                }
+                Program.ConfigGrid(_logic.Read(null), dataGridView);
+               
             }
             catch (Exception ex)
             {
