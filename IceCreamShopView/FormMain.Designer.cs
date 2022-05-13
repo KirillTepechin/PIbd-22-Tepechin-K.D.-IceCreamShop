@@ -33,9 +33,9 @@ namespace IceCreamShopView
             this.toolStripMenuItemManual = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemClients = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemImplementers = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemMessages = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemIngredients = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemIceCreams = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemMessages = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemWarehouses = new System.Windows.Forms.ToolStripMenuItem();
             this.отчётыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemIceCreamsList = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,21 +60,18 @@ namespace IceCreamShopView
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemManual,
             this.отчётыToolStripMenuItem,
-            this.toolStripMenuItemStartWorks,
             this.toolStripMenuItemCreateBackUp,
             this.toolStripMenuItemStartWorks,
             this.toolStripMenuItemReplenish});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1184, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1284, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // toolStripMenuItemManual
             // 
             this.toolStripMenuItemManual.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemClients,
-            this.toolStripMenuItemImplementers,
             this.toolStripMenuItemIngredients,
             this.toolStripMenuItemIceCreams,
             this.toolStripMenuItemClients,
@@ -84,13 +81,6 @@ namespace IceCreamShopView
             this.toolStripMenuItemManual.Name = "toolStripMenuItemManual";
             this.toolStripMenuItemManual.Size = new System.Drawing.Size(94, 20);
             this.toolStripMenuItemManual.Text = "Справочники";
-            // 
-            // toolStripMenuItemIceCreams
-            // 
-            this.toolStripMenuItemIceCreams.Name = "toolStripMenuItemIceCreams";
-            this.toolStripMenuItemIceCreams.Size = new System.Drawing.Size(149, 22);
-            this.toolStripMenuItemIceCreams.Text = "Мороженое";
-            this.toolStripMenuItemIceCreams.Click += new System.EventHandler(this.toolStripMenuItemIceCreams_Click);
             // 
             // toolStripMenuItemClients
             // 
@@ -106,13 +96,6 @@ namespace IceCreamShopView
             this.toolStripMenuItemImplementers.Text = "Исполнители";
             this.toolStripMenuItemImplementers.Click += new System.EventHandler(this.toolStripMenuItemImplementers_Click);
             // 
-            // toolStripMenuItemMessages
-            // 
-            this.toolStripMenuItemMessages.Name = "toolStripMenuItemMessages";
-            this.toolStripMenuItemMessages.Size = new System.Drawing.Size(149, 22);
-            this.toolStripMenuItemMessages.Text = "Письма";
-            this.toolStripMenuItemMessages.Click += new System.EventHandler(this.toolStripMenuItemMessages_Click);
-            // 
             // toolStripMenuItemIngredients
             // 
             this.toolStripMenuItemIngredients.Name = "toolStripMenuItemIngredients";
@@ -126,6 +109,13 @@ namespace IceCreamShopView
             this.toolStripMenuItemIceCreams.Size = new System.Drawing.Size(149, 22);
             this.toolStripMenuItemIceCreams.Text = "Мороженое";
             this.toolStripMenuItemIceCreams.Click += new System.EventHandler(this.toolStripMenuItemIceCreams_Click);
+            // 
+            // toolStripMenuItemMessages
+            // 
+            this.toolStripMenuItemMessages.Name = "toolStripMenuItemMessages";
+            this.toolStripMenuItemMessages.Size = new System.Drawing.Size(149, 22);
+            this.toolStripMenuItemMessages.Text = "Письма";
+            this.toolStripMenuItemMessages.Click += new System.EventHandler(this.toolStripMenuItemMessages_Click);
             // 
             // toolStripMenuItemWarehouses
             // 
@@ -217,12 +207,12 @@ namespace IceCreamShopView
             this.dataGridView.Location = new System.Drawing.Point(0, 27);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowTemplate.Height = 25;
-            this.dataGridView.Size = new System.Drawing.Size(1002, 429);
+            this.dataGridView.Size = new System.Drawing.Size(1093, 429);
             this.dataGridView.TabIndex = 1;
             // 
             // buttonCreateOrder
             // 
-            this.buttonCreateOrder.Location = new System.Drawing.Point(1008, 115);
+            this.buttonCreateOrder.Location = new System.Drawing.Point(1099, 115);
             this.buttonCreateOrder.Name = "buttonCreateOrder";
             this.buttonCreateOrder.Size = new System.Drawing.Size(164, 31);
             this.buttonCreateOrder.TabIndex = 2;
@@ -232,7 +222,7 @@ namespace IceCreamShopView
             // 
             // buttonIssuedOrder
             // 
-            this.buttonIssuedOrder.Location = new System.Drawing.Point(1008, 219);
+            this.buttonIssuedOrder.Location = new System.Drawing.Point(1099, 219);
             this.buttonIssuedOrder.Name = "buttonIssuedOrder";
             this.buttonIssuedOrder.Size = new System.Drawing.Size(164, 30);
             this.buttonIssuedOrder.TabIndex = 5;
@@ -242,7 +232,7 @@ namespace IceCreamShopView
             // 
             // buttonUpdate
             // 
-            this.buttonUpdate.Location = new System.Drawing.Point(1008, 323);
+            this.buttonUpdate.Location = new System.Drawing.Point(1099, 323);
             this.buttonUpdate.Name = "buttonUpdate";
             this.buttonUpdate.Size = new System.Drawing.Size(164, 32);
             this.buttonUpdate.TabIndex = 6;
@@ -254,7 +244,7 @@ namespace IceCreamShopView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1184, 451);
+            this.ClientSize = new System.Drawing.Size(1284, 451);
             this.Controls.Add(this.buttonUpdate);
             this.Controls.Add(this.buttonIssuedOrder);
             this.Controls.Add(this.buttonCreateOrder);

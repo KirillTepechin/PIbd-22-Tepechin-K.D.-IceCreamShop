@@ -14,7 +14,7 @@ namespace IceCreamShopContracts.ViewModels
     /// </summary>
     public class OrderViewModel
     {
-        [Column(title: "Номер", width: 100)]
+        [Column(title: "Номер", width: 50)]
         public int Id { get; set; }
         public int IceCreamId { get; set; }
         public int ClientId { get; set; }
@@ -32,9 +32,9 @@ namespace IceCreamShopContracts.ViewModels
         public decimal Sum { get; set; }
         [Column(title: "Статус", width: 100)]
         public string Status { get; set; }
-        [Column(title: "Дата создания", width: 100)]
+        [Column(title: "Дата создания", width: 150, dateFormat: "dddd, dd MMMM yyyy HH: mm:ss")]
         public DateTime DateCreate { get; set; }
-        [Column(title: "Дата выполнения", width: 100)]
+        [Column(title: "Дата выполнения", width: 150, dateFormat: "dddd, dd MMMM yyyy HH: mm:ss")]
         public DateTime? DateImplement { get; set; }
     }
 }
