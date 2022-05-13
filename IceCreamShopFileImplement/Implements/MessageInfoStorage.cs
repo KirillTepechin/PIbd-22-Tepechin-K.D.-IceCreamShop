@@ -65,7 +65,23 @@ namespace IceCreamShopFileImplement.Implements
 
         public void Update(MessageInfoBindingModel model)
         {
-            throw new NotImplementedException();
+            var element = source.Messages.FirstOrDefault(rec => rec.MessageId == model.MessageId);
+            if (element == null)
+            {
+                throw new Exception("Элемент не найден");
+            }
+            CreateModel(model, element);
+        }
+        private static MessageInfo CreateModel(MessageInfoBindingModel model, MessageInfo message)
+        {
+            message.MessageId = model.MessageId;
+            message.Body = model.Body;
+            message.ClientId = model.ClientId;
+            message.DateDelivery = model.DateDelivery;
+            message.Subject = model.Subject;
+            message.Reply = model.Reply;
+            message.Viewed = model.Viewed;
+            return message;
         }
     }
 }

@@ -81,7 +81,20 @@ namespace IceCreamShopListImplement.Implements
 
         public void Update(MessageInfoBindingModel model)
         {
-            throw new NotImplementedException();
+            MessageInfo tempMessage = null;
+            foreach (var message in source.Messages)
+            {
+                if (message.MessageId == model.MessageId)
+                {
+                    tempMessage = message;
+                    break;
+                }
+            }
+            if (tempMessage == null)
+            {
+                throw new Exception("Элемент не найден");
+            }
+            CreateModel(model, tempMessage);
         }
     }
 }
