@@ -4,14 +4,16 @@ using IceCreamShopDatabaseImplement;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IceCreamShopDatabaseImplement.Migrations
 {
     [DbContext(typeof(IceCreamShopDatabase))]
-    partial class IceCreamShopDatabaseModelSnapshot : ModelSnapshot
+    [Migration("20220426210104_Add_MessageInfo")]
+    partial class Add_MessageInfo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -194,54 +196,6 @@ namespace IceCreamShopDatabaseImplement.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("IceCreamShopDatabaseImplement.Models.Warehouse", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("DateCreate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ResponsiblePerson")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WarehouseName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Warehouses");
-                });
-
-            modelBuilder.Entity("IceCreamShopDatabaseImplement.Models.WarehouseIngredient", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IngredientId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WarehouseId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IngredientId");
-
-                    b.HasIndex("WarehouseId");
-
-                    b.ToTable("WarehouseIngredients");
-                });
-
             modelBuilder.Entity("IceCreamShopDatabaseImplement.Models.IceCreamIngredient", b =>
                 {
                     b.HasOne("IceCreamShopDatabaseImplement.Models.IceCream", "IceCream")
@@ -295,25 +249,6 @@ namespace IceCreamShopDatabaseImplement.Migrations
                     b.Navigation("Implementer");
                 });
 
-            modelBuilder.Entity("IceCreamShopDatabaseImplement.Models.WarehouseIngredient", b =>
-                {
-                    b.HasOne("IceCreamShopDatabaseImplement.Models.Ingredient", "Ingredient")
-                        .WithMany("WarehouseIngredients")
-                        .HasForeignKey("IngredientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("IceCreamShopDatabaseImplement.Models.Warehouse", "Warehouse")
-                        .WithMany("WarehouseIngredients")
-                        .HasForeignKey("WarehouseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Ingredient");
-
-                    b.Navigation("Warehouse");
-                });
-
             modelBuilder.Entity("IceCreamShopDatabaseImplement.Models.Client", b =>
                 {
                     b.Navigation("MessageInfo");
@@ -336,13 +271,6 @@ namespace IceCreamShopDatabaseImplement.Migrations
             modelBuilder.Entity("IceCreamShopDatabaseImplement.Models.Ingredient", b =>
                 {
                     b.Navigation("IceCreamIngredients");
-
-                    b.Navigation("WarehouseIngredients");
-                });
-
-            modelBuilder.Entity("IceCreamShopDatabaseImplement.Models.Warehouse", b =>
-                {
-                    b.Navigation("WarehouseIngredients");
                 });
 #pragma warning restore 612, 618
         }

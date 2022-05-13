@@ -1,4 +1,5 @@
-﻿using IceCreamShopContracts.BindingModels;
+﻿using IceCreamShopBusinessLogic.MailWorker;
+using IceCreamShopContracts.BindingModels;
 using IceCreamShopContracts.BusinessLogicsContracts;
 using IceCreamShopContracts.Enums;
 using IceCreamShopContracts.StorageContracts;
@@ -14,10 +15,16 @@ namespace IceCreamShopBusinessLogic.BusinessLogics
     public class OrderLogic : IOrderLogic
     {
         private readonly IOrderStorage _orderStorage;
+        private readonly AbstractMailWorker _mailWorker;
+        private readonly IClientStorage _clientStorage;
+
+        public OrderLogic(IOrderStorage orderStorage, IClientStorage clientStorage, AbstractMailWorker mailWorker)
         private readonly IWarehouseStorage _warehouseStorage;
         public OrderLogic(IOrderStorage orderStorage, IWarehouseStorage warehouseStorage)
         {
             _orderStorage = orderStorage;
+            _mailWorker= mailWorker;
+            _clientStorage = clientStorage;
             _warehouseStorage = warehouseStorage;
         }
         public void CreateOrder(CreateOrderBindingModel model)
@@ -30,6 +37,12 @@ namespace IceCreamShopBusinessLogic.BusinessLogics
                 Sum = model.Sum,
                 DateCreate = DateTime.Now,
                 Status = OrderStatus.Принят
+            });
+            _mailWorker.MailSendAsync(new MailSendInfoBindingModel
+            {
+                MailAddress = _clientStorage.GetElement(new ClientBindingModel { Id = model.ClientId })?.Email,
+                Subject = "Заказ создан",
+                Text = $"Дата: {DateTime.Now}, сумма: {model.Sum}"
             });
         }
 
@@ -55,6 +68,12 @@ namespace IceCreamShopBusinessLogic.BusinessLogics
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
                 Status = OrderStatus.Выдан,
+            });
+            _mailWorker.MailSendAsync(new MailSendInfoBindingModel
+            {
+                MailAddress = _clientStorage.GetElement(new ClientBindingModel { Id = order.ClientId })?.Email,
+                Subject = "Заказ выдан",
+                Text = $"Заказ №{order.Id} выдан, Дата: {DateTime.Now}"
             });
         }
 
@@ -84,6 +103,12 @@ namespace IceCreamShopBusinessLogic.BusinessLogics
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
                 Status = OrderStatus.Готов
+            });
+            _mailWorker.MailSendAsync(new MailSendInfoBindingModel
+            {
+                MailAddress = _clientStorage.GetElement(new ClientBindingModel { Id = order.ClientId })?.Email,
+                Subject = "Заказ готов!",
+                Text = $"Заказ №{order.Id} готов, Дата: {DateTime.Now}"
             });
         }
 
@@ -135,6 +160,12 @@ namespace IceCreamShopBusinessLogic.BusinessLogics
                 DateCreate = order.DateCreate,
                 DateImplement = DateTime.Now,
                 Status = Enum.Parse<OrderStatus>(order.Status)
+            });
+            _mailWorker.MailSendAsync(new MailSendInfoBindingModel
+            {
+                MailAddress = _clientStorage.GetElement(new ClientBindingModel { Id = order.ClientId })?.Email,
+                Subject = "Заказ выполняется",
+                Text = $"Заказ №{order.Id} выполняется, Дата: {DateTime.Now}"
             });
         }
     }
