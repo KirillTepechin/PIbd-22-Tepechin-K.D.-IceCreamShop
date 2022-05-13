@@ -17,5 +17,7 @@ namespace IceCreamShopDatabaseImplement.Models
         public string Subject { get; set; }
         public string Body { get; set; }
         public virtual Client Client { get; set; }
+        public bool Viewed { get; set; }
+        public string Reply { get; set; }
     }
 }

@@ -62,5 +62,10 @@ namespace IceCreamShopFileImplement.Implements
                 Body = model.Body
             });
         }
+
+        public void Update(MessageInfoBindingModel model)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

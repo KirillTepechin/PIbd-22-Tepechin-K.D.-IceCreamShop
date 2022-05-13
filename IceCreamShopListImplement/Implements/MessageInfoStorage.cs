@@ -78,5 +78,10 @@ namespace IceCreamShopListImplement.Implements
                 Subject = message.Subject
             };
         }
+
+        public void Update(MessageInfoBindingModel model)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

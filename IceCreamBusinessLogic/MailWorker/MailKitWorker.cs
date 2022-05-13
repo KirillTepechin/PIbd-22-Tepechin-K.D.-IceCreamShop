@@ -66,7 +66,8 @@ namespace IceCreamShopBusinessLogic.MailWorker
                                 MessageId = message.MessageId,
                                 FromMailAddress = mail.Address,
                                 Subject = message.Subject,
-                                Body = message.TextBody
+                                Body = message.TextBody,
+                                Viewed = false
                             });
                         }
                     }

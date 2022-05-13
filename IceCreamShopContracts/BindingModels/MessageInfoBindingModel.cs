@@ -14,6 +14,8 @@ namespace IceCreamShopContracts.BindingModels
         public string Subject { get; set; }
         public string Body { get; set; }
         public DateTime DateDelivery { get; set; }
+        public bool Viewed { get; set; }
+        public string Reply { get; set; }
     }
 
 }
