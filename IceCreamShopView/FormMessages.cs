@@ -77,7 +77,7 @@ namespace IceCreamShopView
                 dataGridView.DataSource = _list.ToList();
                 dataGridView.Columns[0].Visible = false;
                 dataGridView.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                labelPageNumber.Text = string.Format("Page {0}/{1}", pageNumber, _list.PageCount);
+                labelPageNumber.Text = string.Format("Страница {0}/{1}", pageNumber, _list.PageCount);
             }
         }
     }
