@@ -4,6 +4,7 @@ using IceCreamShopContracts.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
+using PagedList;
 
 namespace IceCreamShopRestApi.Controllers
 {
@@ -13,10 +14,12 @@ namespace IceCreamShopRestApi.Controllers
     {
         private readonly IOrderLogic _order;
         private readonly IIceCreamLogic _iceCream;
-        public MainController(IOrderLogic order, IIceCreamLogic iceCream)
+        private readonly IMessageInfoLogic _messageInfo;
+        public MainController(IOrderLogic order, IIceCreamLogic iceCream, IMessageInfoLogic messageInfo)
         {
             _order = order;
             _iceCream = iceCream;
+            _messageInfo = messageInfo;
         }
         [HttpGet]
         public List<IceCreamViewModel> GetIceCreamList() => _iceCream.Read(null)?.ToList();
@@ -28,6 +31,9 @@ namespace IceCreamShopRestApi.Controllers
         public List<OrderViewModel> GetOrders(int clientId) => _order.Read(new
        OrderBindingModel
         { ClientId = clientId });
+        [HttpGet]
+        public List<MessageInfoViewModel> GetMessages(int clientId, int pageIndex) => _messageInfo.Read(new    
+       MessageInfoBindingModel { ClientId = clientId }).OrderByDescending(rec=>rec.DateDelivery).ToList();
         [HttpPost]
         public void CreateOrder(CreateOrderBindingModel model) =>
        _order.CreateOrder(model);

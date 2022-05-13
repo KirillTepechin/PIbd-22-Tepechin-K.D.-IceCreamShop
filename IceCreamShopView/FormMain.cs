@@ -150,6 +150,12 @@ namespace IceCreamShopView
             var form = Program.Container.Resolve<FormImplementers>();
             form.ShowDialog();
         }
+
+        private void toolStripMenuItemMessages_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormMessages>();
+            form.ShowDialog();
+        }
         private void toolStripMenuItemWarehouseList_Click(object sender, EventArgs e)
         {
             using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })

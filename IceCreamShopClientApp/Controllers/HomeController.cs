@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using X.PagedList;
 
 namespace IceCreamShopClientApp.Controllers
 {
@@ -139,6 +140,19 @@ namespace IceCreamShopClientApp.Controllers
             IceCreamViewModel ic =
             APIClient.GetRequest<IceCreamViewModel>($"api/main/geticecream?iceCreamId={iceCream}");
             return count * ic.Price;
+        }
+        [HttpGet]
+        public IActionResult Messages(int? page)
+        {
+            int pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            if (Program.Client == null)
+            {
+                return Redirect("~/Home/Enter");
+            }  
+            var res = APIClient.GetRequest<List<MessageInfoViewModel>>
+                ($"api/main/getmessages?clientId={Program.Client.Id}&pageIndex={pageIndex}");
+           
+            return View(res.ToPagedList(pageIndex, 2));
         }
     }
 }

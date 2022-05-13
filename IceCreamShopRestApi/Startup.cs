@@ -1,4 +1,6 @@
 using IceCreamShopBusinessLogic.BusinessLogics;
+using IceCreamShopBusinessLogic.MailWorker;
+using IceCreamShopContracts.BindingModels;
 using IceCreamShopContracts.BusinessLogicsContracts;
 using IceCreamShopContracts.StorageContracts;
 using IceCreamShopDatabaseImplement.Implements;
@@ -38,6 +40,10 @@ namespace IceCreamShopRestApi
             services.AddTransient<IOrderLogic, OrderLogic>();
             services.AddTransient<IClientLogic, ClientLogic>();
             services.AddTransient<IIceCreamLogic, IceCreamLogic>();
+            services.AddTransient<IMessageInfoStorage, MessageInfoStorage>();
+            services.AddTransient<IMessageInfoLogic, MessageInfoLogic>();
+            services.AddSingleton<AbstractMailWorker, MailKitWorker>();
+            services.AddControllers();
             services.AddTransient<IWarehouseLogic, WarehouseLogic>();
             services.AddTransient<IIngredientLogic, IngredientLogic>();
             services.AddControllers().AddNewtonsoftJson();
@@ -66,6 +72,17 @@ namespace IceCreamShopRestApi
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            var mailSender = app.ApplicationServices.GetService<AbstractMailWorker>();
+            mailSender.MailConfig(new MailConfigBindingModel
+            {
+                MailLogin = Configuration?["MailLogin"],
+                MailPassword = Configuration?["MailPassword"],
+                SmtpClientHost = Configuration?["SmtpClientHost"],
+                SmtpClientPort = Convert.ToInt32(Configuration?["SmtpClientPort"]),
+                PopHost = Configuration?["PopHost"],
+                PopPort = Convert.ToInt32(Configuration?["PopPort"])
             });
         }
     }
