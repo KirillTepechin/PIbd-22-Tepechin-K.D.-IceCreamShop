@@ -53,9 +53,9 @@
             </tbody>
         </table>
     }      
-        Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
-        <br />
-        <div class="btn-group>
-            @X.PagedList.Mvc.Core.HtmlHelper.PagedListPager(Html,Model, page => Url.Action("Messages", new { page }))   
-        </div>
+        @X.PagedList.Mvc.Core.HtmlHelper.PagedListPager(Html,Model, page => Url.Action("Messages", new { page })
+        ,new X.PagedList.Mvc.Core.PagedListRenderOptions {
+        LiElementClasses = new string[] { "page-item" },
+        UlElementClasses =new string[] {"pagination justify-content-center"},
+        PageClasses = new string[] { "page-link" }})   
 </div>

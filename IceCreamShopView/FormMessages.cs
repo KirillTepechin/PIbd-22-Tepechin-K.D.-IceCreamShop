@@ -69,6 +69,7 @@ namespace IceCreamShopView
         }
         public void LoadData()
         {
+            Program.ConfigGrid(logic.Read(null), dataGridView);
             _list = GetPagedList(pageNumber);
             if (_list != null)
             {
