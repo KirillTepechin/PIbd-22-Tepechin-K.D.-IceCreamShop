@@ -1,11 +1,13 @@
 ﻿using IceCreamShopContracts.BindingModels;
 using IceCreamShopContracts.BusinessLogicsContracts;
+using IceCreamShopContracts.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -26,7 +28,8 @@ namespace IceCreamShopView
         {
             try
             {
-                var dict = _logic.GetWarhouseIngredient();
+                MethodInfo method = _logic.GetType().GetMethod("GetWarhouseIngredient");
+                List<ReportWarhouseIngredientViewModel> dict = (List<ReportWarhouseIngredientViewModel>)method.Invoke(_logic, Array.Empty<object>());
                 if (dict != null)
                 {
                     dataGridView.Rows.Clear();
@@ -57,11 +60,10 @@ namespace IceCreamShopView
             {
                 try
                 {
-                    _logic.SaveWarhouseIngredientToExcelFile(new
-                    ReportBindingModel
-                    {
+                    MethodInfo method = _logic.GetType().GetMethod("SaveWarhouseIngredientToExcelFile");
+                    method.Invoke(_logic, new object[] {new ReportBindingModel{
                         FileName = dialog.FileName
-                    });
+                    }});
                     MessageBox.Show("Выполнено", "Успех",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }

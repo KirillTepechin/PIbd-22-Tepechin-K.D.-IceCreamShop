@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -107,10 +108,11 @@ namespace IceCreamShopView
             using var dialog = new SaveFileDialog { Filter = "docx|*.docx" };
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                _reportLogic.SaveIceCreamsToWordFile(new ReportBindingModel
+                MethodInfo method = _reportLogic.GetType().GetMethod("SaveIceCreamsToWordFile");
+                method.Invoke(_reportLogic, new object[] {new ReportBindingModel
                 {
                     FileName = dialog.FileName
-                });
+                }});
                 MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
             }

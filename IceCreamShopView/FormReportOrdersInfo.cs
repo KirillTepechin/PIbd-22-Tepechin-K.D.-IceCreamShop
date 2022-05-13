@@ -9,6 +9,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -42,10 +43,11 @@ namespace IceCreamShopView
             {
                 try
                 {
-                    _logic.SaveOrdersInfoToPdfFile(new ReportBindingModel
+                    MethodInfo method = _logic.GetType().GetMethod("SaveOrdersInfoToPdfFile");
+                    method.Invoke(_logic, new object[] {new ReportBindingModel
                     {
-                        FileName = dialog.FileName
-                    });
+                        FileName = dialog.FileName,
+                    }});
                     MessageBox.Show("Выполнено", "Успех",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -60,7 +62,8 @@ namespace IceCreamShopView
         {
             try
             {
-                var dataSource = _logic.GetOrdersGroupByDate();
+                MethodInfo method = _logic.GetType().GetMethod("GetOrdersGroupByDate");
+                var dataSource = method.Invoke(_logic, Array.Empty<object>());
                 var source = new ReportDataSource("DataSetOrdersInfo", dataSource);
                 reportViewer.LocalReport.DataSources.Clear();
                 reportViewer.LocalReport.DataSources.Add(source);

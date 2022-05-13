@@ -20,9 +20,9 @@ namespace IceCreamShopContracts.ViewModels
         public string Subject { get; set; }
         [Column(title: "Текст", gridViewAutoSize: GridViewAutoSize.AllCells)]
         public string Body { get; set; }
-        [DisplayName("Прочитано")]
+        [Column(title: "Прочитано", width: 100)]
         public bool Viewed { get; set; }
-        [DisplayName("Ответ")]
+        [Column(title: "Ответ", width: 100)]
         public string Reply { get; set; }
     }
 }
