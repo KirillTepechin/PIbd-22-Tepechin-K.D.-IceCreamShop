@@ -34,6 +34,7 @@ namespace IceCreamShopView
         {
             pageNumber = this.pageNumber;
             return logic.Read(null).OrderByDescending(rec => rec.DateDelivery).ToPagedList(pageNumber, pageSize);
+
         }
 
         private  void buttonPrev_Click(object sender, EventArgs e)
@@ -43,7 +44,7 @@ namespace IceCreamShopView
                 _list = GetPagedList(--pageNumber);
                 buttonPrev.Enabled = _list.HasPreviousPage;
                 buttonNext.Enabled= _list.HasNextPage;
-                dataGridView.DataSource=_list.ToList();
+                Program.ConfigGrid(_list.ToList(), dataGridView);
                 labelPageNumber.Text = string.Format("Page {0}/{1}", pageNumber, _list.PageCount);
             }
         }
@@ -53,9 +54,9 @@ namespace IceCreamShopView
             if (_list.HasNextPage)
             {
                 _list = GetPagedList(++pageNumber);
+                Program.ConfigGrid(_list.ToList(), dataGridView);
                 buttonPrev.Enabled = _list.HasPreviousPage;
                 buttonNext.Enabled = _list.HasNextPage;
-                dataGridView.DataSource = _list.ToList();
                 labelPageNumber.Text = string.Format("Page {0}/{1}", pageNumber, _list.PageCount);
             }
         }
@@ -70,15 +71,11 @@ namespace IceCreamShopView
         public void LoadData()
         {
             _list = GetPagedList(pageNumber);
-            if (_list != null)
-            {
-                buttonPrev.Enabled = _list.HasPreviousPage;
-                buttonNext.Enabled = _list.HasNextPage;
-                dataGridView.DataSource = _list.ToList();
-                dataGridView.Columns[0].Visible = false;
-                dataGridView.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                labelPageNumber.Text = string.Format("Страница {0}/{1}", pageNumber, _list.PageCount);
-            }
+            Program.ConfigGrid(_list.ToList(), dataGridView);
+            buttonPrev.Enabled = _list.HasPreviousPage;
+            buttonNext.Enabled = _list.HasNextPage;
+            labelPageNumber.Text = string.Format("Page {0}/{1}", pageNumber, _list.PageCount);
+           
         }
     }
 }

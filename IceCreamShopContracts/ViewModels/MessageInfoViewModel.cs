@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IceCreamShopContracts.Attributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -9,18 +10,19 @@ namespace IceCreamShopContracts.ViewModels
 {
     public class MessageInfoViewModel
     {
+        [Column(title: "Номер", width: 100, visible: false)]
         public string MessageId { get; set; }
-        [DisplayName("Отправитель")]
+        [Column(title: "Отправитель", width: 150)]
         public string SenderName { get; set; }
-        [DisplayName("Дата письма")]
+        [Column(title: "Дата письма", width: 100, dateFormat: "dddd, dd MMMM yyyy HH: mm:ss")]
         public DateTime DateDelivery { get; set; }
-        [DisplayName("Заголовок")]
+        [Column(title: "Заголовок", width: 100)]
         public string Subject { get; set; }
-        [DisplayName("Текст")]
+        [Column(title: "Текст", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string Body { get; set; }
-        [DisplayName("Прочитано")]
+        [Column(title: "Прочитано", width: 100)]
         public bool Viewed { get; set; }
-        [DisplayName("Ответ")]
+        [Column(title: "Ответ", width: 100, gridViewAutoSize: GridViewAutoSize.Fill)]
         public string Reply { get; set; }
     }
 }
