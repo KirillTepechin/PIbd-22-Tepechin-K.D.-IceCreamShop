@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IceCreamShopContracts.Attributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -12,8 +13,9 @@ namespace IceCreamShopContracts.ViewModels
     /// </summary>
     public class IngredientViewModel
     {
+        [Column(title: "Номер", width: 100, visible: false)]
         public int Id { get; set; }
-        [DisplayName("Название ингредиента")]
+        [Column(title: "Название ингредиента", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string IngredientName { get; set; }
     }
 }
