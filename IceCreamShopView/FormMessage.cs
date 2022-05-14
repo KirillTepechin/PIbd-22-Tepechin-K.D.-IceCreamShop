@@ -55,10 +55,10 @@ namespace IceCreamShopView
                                 Reply = view.Reply
                             });
                         }
-                        labelBody.Text += view.Body;
-                        labelSenderName.Text += view.SenderName;
-                        labelSubject.Text += view.Subject;
-                        labelDate.Text += view.DateDelivery.ToString();
+                        labelBody.Text = view.Body;
+                        labelSenderName.Text = view.SenderName;
+                        labelSubject.Text = view.Subject;
+                        labelDate.Text = view.DateDelivery.ToString();
                     }
                 }
                 catch (Exception ex)
